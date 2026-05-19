@@ -1,8 +1,4 @@
-const StatsCard = ({
-  title,
-  value,
-  subtitle,
-}) => {
+const AuditStatsCard = ({ title, value }) => {
 
   return (
     <div
@@ -13,8 +9,6 @@ const StatsCard = ({
         rounded-3xl
         p-8
         backdrop-blur-xl
-        hover:border-cyan-400/40
-        transition-all
       "
     >
 
@@ -24,21 +18,16 @@ const StatsCard = ({
 
       <h2
         className="
-          text-5xl
+          text-4xl
           font-black
-          text-white
-          mb-3
+          text-cyan-400
         "
       >
         {value}
       </h2>
 
-      <p className="text-cyan-400">
-        {subtitle}
-      </p>
-
     </div>
   );
 };
 
-export default StatsCard;
+export default AuditStatsCard;
