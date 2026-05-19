@@ -9,6 +9,7 @@ import { loginUser } from "../../features/auth/authThunk";
 import Input from "../comman/Input";
 
 import Button from "../comman/Button";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
 
@@ -39,13 +40,21 @@ const LoginForm = () => {
         loginUser(formData)
       ).unwrap();
 
-      console.log(result);
+      console.log("Login result:", result);
 
-      navigate("/dashboard");
+      // Handle both direct response and nested data structure
+      const message = result?.message || result?.data?.message || "Login successful!";
+      toast.success(message);
+
+      // Small delay to ensure token is saved before navigation
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 100);
 
     } catch (error) {
 
-      console.log(error);
+      console.log("Login error:", error);
+      toast.error(error || "Login failed");
     }
   };
 

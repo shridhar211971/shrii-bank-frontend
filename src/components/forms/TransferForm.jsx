@@ -1,9 +1,13 @@
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { transferMoney } from "../../features/transaction/transactionThunk";
 import Input from "../comman/Input";
 import Button from "../comman/Button";
+import toast from "react-hot-toast";
 
 const TransferForm = () => {
+
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     accountNumber: "",
@@ -19,10 +23,22 @@ const TransferForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    try {
+      const result = await dispatch(transferMoney(formData)).unwrap();
+      console.log("Transfer result:", result);
+
+      // Handle both direct response and nested data structure
+      const message = result?.message || result?.data?.message || "Transfer successful!";
+      toast.success(message);
+
+      setFormData({ accountNumber: "", amount: "", description: "" });
+    } catch (error) {
+      console.log("Transfer error:", error);
+      toast.error(error || "Transfer failed");
+    }
   };
 
   return (

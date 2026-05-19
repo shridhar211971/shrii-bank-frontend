@@ -1,8 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../../features/auth/authThunk";
 import Input from "../comman/Input";
 import Button from "../comman/Button";
+import toast from "react-hot-toast";
 
 const RegisterForm = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -19,10 +26,22 @@ const RegisterForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    try {
+      const result = await dispatch(registerUser(formData)).unwrap();
+      console.log("Register result:", result);
+
+      // Handle both direct response and nested data structure
+      const message = result?.message || result?.data?.message || "Registration successful! Please login.";
+      toast.success(message);
+
+      navigate("/login");
+    } catch (error) {
+      console.log("Register error:", error);
+      toast.error(error || "Registration failed");
+    }
   };
 
   return (
@@ -109,9 +128,12 @@ const RegisterForm = () => {
 
             Already have an account?
 
-            <span className="text-cyan-400 ml-2 cursor-pointer">
+            <Link
+              to="/login"
+              className="text-cyan-400 ml-2 hover:text-cyan-300"
+            >
               Login
-            </span>
+            </Link>
 
           </p>
 

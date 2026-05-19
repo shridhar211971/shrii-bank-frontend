@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { getToken } from "../utils/token";
 
 const useAuth = () => {
 
@@ -6,10 +7,13 @@ const useAuth = () => {
     (state) => state.auth
   );
 
+  // Check both Redux state and localStorage for token
+  const localStorageToken = getToken();
+
   return {
     user,
     token,
-    isAuthenticated: !!token,
+    isAuthenticated: !!token || !!localStorageToken,
   };
 };
 

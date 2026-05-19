@@ -1,11 +1,16 @@
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { resetPassword } from "../../features/auth/authThunk";
 import AuthLayout from "../../layouts/AuthLayout";
-
 import Input from "../../components/comman/Input";
 import Button from "../../components/comman/Button";
+import toast from "react-hot-toast";
 
 const ResetPassword = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     code: "",
@@ -20,11 +25,23 @@ const ResetPassword = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    console.log(formData);
+    try {
+      const result = await dispatch(resetPassword(formData)).unwrap();
+      console.log("Reset password result:", result);
+
+      // Handle both direct response and nested data structure
+      const message = result?.message || result?.data?.message || "Password reset successful! Please login.";
+      toast.success(message);
+
+      navigate("/login");
+    } catch (error) {
+      console.log("Reset password error:", error);
+      toast.error(error || "Failed to reset password");
+    }
   };
 
   return (

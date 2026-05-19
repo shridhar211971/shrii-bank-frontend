@@ -1,6 +1,32 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardLayout from "../../layouts/DashboardLayout";
+import { getProfile } from "../../features/profile/profileThunk";
+import toast from "react-hot-toast";
 
 const Profile = () => {
+
+  const dispatch = useDispatch();
+
+  const { profile, loading} = useSelector(
+    (state) => state.profile
+  );
+
+  useEffect(() => {
+    dispatch(getProfile())
+      .unwrap()
+      .catch((err) => {
+        toast.error(err || "Failed to load profile");
+      });
+  }, [dispatch]);
+
+  if (loading) {
+    return (
+      <DashboardLayout>
+        <div className="text-white">Loading profile...</div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout>
@@ -70,7 +96,7 @@ const Profile = () => {
                     text-white
                   "
                 >
-                  Shridhar
+                  {profile?.firstName || ""} {profile?.lastName || ""}
                 </h2>
 
               </div>
@@ -82,7 +108,19 @@ const Profile = () => {
                 </p>
 
                 <h2 className="text-white">
-                  shrii@gmail.com
+                  {profile?.email || ""}
+                </h2>
+
+              </div>
+
+              <div>
+
+                <p className="text-slate-400 mb-2">
+                  Phone Number
+                </p>
+
+                <h2 className="text-white">
+                  {profile?.phoneNumber || ""}
                 </h2>
 
               </div>

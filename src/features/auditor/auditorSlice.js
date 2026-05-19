@@ -13,7 +13,11 @@ const auditorSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
 
   extraReducers: (builder) => {
 
@@ -25,7 +29,7 @@ const auditorSlice = createSlice({
 
       .addCase(getAuditTotals.fulfilled, (state, action) => {
         state.loading = false;
-        state.totals = action.payload?.data || {};
+        state.totals = action.payload?.data || action.payload || {};
       })
 
       .addCase(getAuditTotals.rejected, (state, action) => {

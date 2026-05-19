@@ -8,18 +8,23 @@ const DashboardLayout = ({ children }) => {
       className="
         flex
         min-h-screen
-        bg-[#020817]
+        bg-gradient-to-br
+        from-[#020817]
+        via-[#0a1525]
+        to-[#020817]
       "
     >
 
       <Sidebar />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
 
         <Header />
 
-        <main className="p-10">
-          {children}
+        <main className="flex-1 p-6 lg:p-10 overflow-auto">
+          <div className="max-w-full mx-auto">
+            {children}
+          </div>
         </main>
 
       </div>

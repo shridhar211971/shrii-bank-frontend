@@ -9,6 +9,7 @@ import AuditStatsCard from "../../components/cards/AuditStatsCard";
 import {
   getAuditTotals,
 } from "../../features/auditor/auditorThunk";
+import toast from "react-hot-toast";
 
 const AuditorDashboard = () => {
 
@@ -19,7 +20,11 @@ const AuditorDashboard = () => {
   );
 
   useEffect(() => {
-    dispatch(getAuditTotals());
+    dispatch(getAuditTotals())
+      .unwrap()
+      .catch((err) => {
+        toast.error(err || "Failed to load audit data");
+      });
   }, [dispatch]);
 
   return (

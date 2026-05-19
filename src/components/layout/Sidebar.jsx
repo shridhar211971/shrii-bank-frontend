@@ -7,9 +7,21 @@ import {
   LogOut,
 } from "lucide-react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/auth/authSlice";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
 
   const navItems = [
     {
@@ -123,6 +135,7 @@ const Sidebar = () => {
       {/* LOGOUT */}
 
       <button
+        onClick={handleLogout}
         className="
           flex
           items-center

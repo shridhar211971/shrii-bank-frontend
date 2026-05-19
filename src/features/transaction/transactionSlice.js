@@ -16,7 +16,11 @@ const transactionSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
 
   extraReducers: (builder) => {
 
@@ -29,7 +33,7 @@ const transactionSlice = createSlice({
       .addCase(getTransactions.fulfilled, (state, action) => {
         state.loading = false;
         state.transactions =
-          action.payload?.data || [];
+          action.payload?.data || action.payload || [];
       })
 
       .addCase(getTransactions.rejected, (state, action) => {

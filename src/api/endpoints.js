@@ -17,7 +17,8 @@ const ENDPOINTS = {
   },
 
   TRANSACTIONS: {
-    TRANSFER: "/transactions",
+    ALL: "/transactions",
+    TRANSFER: "/transactions/transfer",
   },
 
   AUDITOR: {

@@ -1,31 +1,33 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardLayout from "../../layouts/DashboardLayout";
-
 import TransactionCard from "../../components/cards/TransactionCard";
+import { getTransactions } from "../../features/transaction/transactionThunk";
+import toast from "react-hot-toast";
 
 const Transactions = () => {
 
-  const transactions = [
-    {
-      type: "Transfer",
-      amount: 1200,
-      date: "18 May 2026",
-      status: "Completed",
-    },
+  const dispatch = useDispatch();
 
-    {
-      type: "Deposit",
-      amount: 800,
-      date: "17 May 2026",
-      status: "Success",
-    },
+  const { transactions, loading} = useSelector(
+    (state) => state.transaction
+  );
 
-    {
-      type: "Withdrawal",
-      amount: 400,
-      date: "16 May 2026",
-      status: "Pending",
-    },
-  ];
+  useEffect(() => {
+    dispatch(getTransactions())
+      .unwrap()
+      .catch((err) => {
+        toast.error(err || "Failed to load transactions");
+      });
+  }, [dispatch]);
+
+  if (loading) {
+    return (
+      <DashboardLayout>
+        <div className="text-white">Loading transactions...</div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout>
@@ -53,17 +55,21 @@ const Transactions = () => {
 
         <div className="space-y-6">
 
-          {transactions.map((item, index) => (
+          {transactions && transactions.length > 0 ? (
+            transactions.map((item, index) => (
 
-            <TransactionCard
-              key={index}
-              type={item.type}
-              amount={item.amount}
-              date={item.date}
-              status={item.status}
-            />
+              <TransactionCard
+                key={index}
+                type={item.type}
+                amount={item.amount}
+                date={item.date}
+                status={item.status}
+              />
 
-          ))}
+            ))
+          ) : (
+            <div className="text-slate-400">No transactions found</div>
+          )}
 
         </div>
 

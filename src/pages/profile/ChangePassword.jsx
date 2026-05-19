@@ -1,11 +1,14 @@
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
 import DashboardLayout from "../../layouts/DashboardLayout";
-
-import Input from "../../components/common/Input";
-import Button from "../../components/common/Button";
+import Input from "../../components/comman/Input";
+import Button from "../../components/comman/Button";
+import toast from "react-hot-toast";
+import { updatePassword } from "../../features/profile/profileThunk";
 
 const ChangePassword = () => {
+
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     oldPassword: "",
@@ -20,11 +23,23 @@ const ChangePassword = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    console.log(formData);
+    try {
+      const result = await dispatch(updatePassword(formData)).unwrap();
+      console.log("Update password result:", result);
+
+      // Handle both direct response and nested data structure
+      const message = result?.message || result?.data?.message || "Password updated successfully!";
+      toast.success(message);
+
+      setFormData({ oldPassword: "", newPassword: "" });
+    } catch (error) {
+      console.log("Update password error:", error);
+      toast.error(error || "Failed to update password");
+    }
   };
 
   return (

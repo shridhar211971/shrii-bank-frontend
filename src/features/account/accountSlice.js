@@ -13,7 +13,11 @@ const accountSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
 
   extraReducers: (builder) => {
 
@@ -25,7 +29,7 @@ const accountSlice = createSlice({
 
       .addCase(getMyAccounts.fulfilled, (state, action) => {
         state.loading = false;
-        state.accounts = action.payload?.data || [];
+        state.accounts = action.payload?.data || action.payload || [];
       })
 
       .addCase(getMyAccounts.rejected, (state, action) => {

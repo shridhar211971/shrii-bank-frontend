@@ -1,19 +1,36 @@
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { forgotPassword } from "../../features/auth/authThunk";
 import AuthLayout from "../../layouts/AuthLayout";
-
 import Input from "../../components/comman/Input";
 import Button from "../../components/comman/Button";
+import toast from "react-hot-toast";
 
 const ForgotPassword = () => {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    console.log(email);
+    try {
+      const result = await dispatch(forgotPassword({ email })).unwrap();
+      console.log("Forgot password result:", result);
+
+      // Handle both direct response and nested data structure
+      const message = result?.message || result?.data?.message || "Reset code sent to your email!";
+      toast.success(message);
+
+      navigate("/reset-password");
+    } catch (error) {
+      console.log("Forgot password error:", error);
+      toast.error(error || "Failed to send reset code");
+    }
   };
 
   return (
