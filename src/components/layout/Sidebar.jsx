@@ -4,160 +4,129 @@ import {
   ReceiptText,
   User,
   ShieldCheck,
-  LogOut,
 } from "lucide-react";
 
-import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../../features/auth/authSlice";
-import toast from "react-hot-toast";
+import { NavLink } from "react-router-dom";
 
-const Sidebar = () => {
+import Shriilogo from "../../assets/shriilogo.png";
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    toast.success("Logged out successfully");
-    navigate("/login");
-  };
-
+const Sidebar = ({ isOpen }) => {
   const navItems = [
     {
       title: "Dashboard",
       path: "/dashboard",
-      icon: <LayoutDashboard size={20} />,
-    },
-
-    {
-      title: "Transfer",
-      path: "/transfer",
-      icon: <ArrowLeftRight size={20} />,
+      icon: <LayoutDashboard size={40} />,
     },
 
     {
       title: "Transactions",
+      path: "/transfer",
+      icon: <ArrowLeftRight size={40} />,
+    },
+
+    {
+      title: "Transactions History",
       path: "/transactions",
-      icon: <ReceiptText size={20} />,
+      icon: <ReceiptText size={40} />,
     },
 
     {
       title: "Profile",
       path: "/profile",
-      icon: <User size={20} />,
+      icon: <User size={40} />,
     },
 
     {
       title: "Auditor",
       path: "/auditor",
-      icon: <ShieldCheck size={20} />,
+      icon: <ShieldCheck size={40} />,
     },
   ];
 
   return (
     <aside
-      className="
-        w-[280px]
-        min-h-screen
+      className={`
         bg-[#071028]
         border-r
         border-white/10
-        flex
-        flex-col
-        justify-between
-        px-6
-        py-8
-      "
+        min-h-screen
+        transition-all
+        duration-300
+        overflow-hidden
+
+        ${isOpen ? "w-[250px]" : "w-[55px]"}
+      `}
     >
+      {/* LOGO */}
 
-      <div>
+      <div className="py-8 px-5 border-b border-white/10 mb-4">
+        <div className="flex flex-col items-center mb-4">
+          <img
+            src={Shriilogo}
+            alt="Shrii Bank"
+            className="w-20 h-20 object-contain"
+          />
 
-        {/* LOGO */}
+          {isOpen && (
+            <>
+              <p className="text-cyan-400 text-4xl font-black mt-5">
+                SHRII BANK
+              </p>
 
-        <div className="mb-14">
-
-          <h1
-            className="
-              text-3xl
-              font-black
-              text-cyan-400
-            "
-          >
-            SHRII BANK
-          </h1>
-
-          <p className="text-slate-400 text-sm mt-2">
-            Modern Banking Platform
-          </p>
-
+              <p className="text-slate-400 text-sm mt-3">
+                Modern Banking Platform
+              </p>
+            </>
+          )}
         </div>
-
-        {/* NAVIGATION */}
-
-        <nav className="space-y-4">
-
-          {navItems.map((item) => (
-
-            <NavLink
-              key={item.title}
-              to={item.path}
-
-              className={({ isActive }) => `
-                flex
-                items-center
-                gap-4
-                px-5
-                py-4
-                rounded-2xl
-                transition-all
-                duration-300
-                ${
-                  isActive
-                    ? "bg-cyan-500 text-black font-bold"
-                    : "text-slate-300 hover:bg-white/5"
-                }
-              `}
-            >
-
-              {item.icon}
-
-              <span>{item.title}</span>
-
-            </NavLink>
-
-          ))}
-
-        </nav>
-
+        
       </div>
 
-      {/* LOGOUT */}
+      {/* NAV */}
 
-      <button
-        onClick={handleLogout}
-        className="
-          flex
-          items-center
-          justify-center
-          gap-3
-          bg-red-500/10
-          border
-          border-red-500/20
-          py-4
-          rounded-2xl
-          text-red-400
-          hover:bg-red-500/20
-          transition-all
-        "
-      >
+      <nav className="mt-12 p-4 space-y-3">
+        {navItems.map((item) => (
+          <NavLink
+            key={item.title}
+            to={item.path}
+            className={({ isActive }) => `
+              flex
+              items-center
+              gap-4
+              px-4
+              py-4
+              rounded-2xl
+              border
+              transition-all
+              duration-300
 
-        <LogOut size={18} />
+              ${
+                isActive
+                  ? `
+                    bg-cyan-500
+                    text-black
+                    border-cyan-400
+                    font-semibold
+                  `
+                  : `
+                    border-white/10
+                    text-slate-300
+                    hover:bg-white/5
+                    hover:border-cyan-400/40
+                  `
+              }
+            `}
+          >
+            {item.icon}
 
-        Logout
-
-      </button>
-
+            {isOpen && (
+              <span className="text-[17px]">
+                {item.title}
+              </span>
+            )}
+          </NavLink>
+        ))}
+      </nav>
     </aside>
   );
 };

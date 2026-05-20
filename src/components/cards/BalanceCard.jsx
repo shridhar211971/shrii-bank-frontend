@@ -22,7 +22,7 @@ const BalanceCard = ({ balance }) => {
           text-white
         "
       >
-        ${balance}
+        ₹{balance}
       </h2>
 
     </div>

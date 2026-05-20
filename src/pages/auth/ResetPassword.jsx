@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetPassword } from "../../features/auth/authThunk";
+import { resetPassword } from "../../features/auth/authSlice";
 import AuthLayout from "../../layouts/AuthLayout";
 import Input from "../../components/comman/Input";
 import Button from "../../components/comman/Button";

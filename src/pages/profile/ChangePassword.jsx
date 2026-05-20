@@ -1,112 +1,223 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import DashboardLayout from "../../layouts/DashboardLayout";
-import Input from "../../components/comman/Input";
-import Button from "../../components/comman/Button";
-import toast from "react-hot-toast";
-import { updatePassword } from "../../features/profile/profileThunk";
 
-const ChangePassword = () => {
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogContent,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 
-  const dispatch = useDispatch();
+import CloseIcon from "@mui/icons-material/Close";
 
+const ChangePassword = ({ open, handleClose, handleSubmitPassword }) => {
   const [formData, setFormData] = useState({
     oldPassword: "",
     newPassword: "",
   });
 
   const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const textFieldSx = {
+    "& .MuiOutlinedInput-root": {
+      height: 56,
+
+      borderRadius: "18px",
+
+      color: "#fff",
+
+      background: "rgba(255,255,255,0.03)",
+
+      "& fieldset": {
+        borderColor: "rgba(255,255,255,0.12)",
+      },
+
+      "&:hover fieldset": {
+        borderColor: "#22d3ee",
+      },
+
+      "&.Mui-focused fieldset": {
+        borderColor: "#22d3ee",
+        borderWidth: "2px",
+      },
+    },
+
+    "& input": {
+      color: "#fff",
+    },
+
+    "& input::placeholder": {
+      color: "#94a3b8",
+      opacity: 1,
+    },
+  };
+
+  const handleSubmit = () => {
+    handleSubmitPassword(formData);
 
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+      oldPassword: "",
+      newPassword: "",
     });
   };
 
-  const handleSubmit = async (e) => {
-
-    e.preventDefault();
-
-    try {
-      const result = await dispatch(updatePassword(formData)).unwrap();
-      console.log("Update password result:", result);
-
-      // Handle both direct response and nested data structure
-      const message = result?.message || result?.data?.message || "Password updated successfully!";
-      toast.success(message);
-
-      setFormData({ oldPassword: "", newPassword: "" });
-    } catch (error) {
-      console.log("Update password error:", error);
-      toast.error(error || "Failed to update password");
-    }
-  };
-
   return (
-    <DashboardLayout>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      fullWidth
+      maxWidth="sm"
+      PaperProps={{
+        sx: {
+          background: "linear-gradient(135deg,#071120,#0f172a)",
 
-      <div className="space-y-10">
+          border: "1px solid rgba(255,255,255,0.08)",
 
-        <div>
+          borderRadius: "32px",
 
-          <h1
-            className="
-              text-5xl
-              font-black
-              text-white
-              mb-3
-            "
-          >
-            Change Password
-          </h1>
+          overflow: "hidden",
 
-          <p className="text-slate-400">
-            Update your account password
-          </p>
+          boxShadow: "0 25px 60px rgba(0,0,0,0.5)",
+        },
+      }}
+    >
+      <DialogContent
+        sx={{
+          p: {
+            xs: 3,
+            md: 5,
+          },
+        }}
+      >
+        {/* HEADER */}
 
-        </div>
-
-        <form
-          onSubmit={handleSubmit}
-          className="
-            bg-white/5
-            border
-            border-white/10
-            rounded-3xl
-            p-10
-            max-w-2xl
-          "
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={5}
         >
+          <Box>
+            <Typography
+              variant="h4"
+              sx={{
+                color: "#fff",
+                fontWeight: 900,
+                mb: 1,
+              }}
+            >
+              Change Password
+            </Typography>
 
-          <div className="space-y-6">
+            <Typography
+              sx={{
+                color: "#94a3b8",
+              }}
+            >
+              Secure your banking account
+            </Typography>
+          </Box>
 
-            <Input
-              label="Current Password"
+          <IconButton
+            onClick={handleClose}
+            sx={{
+              color: "#fff",
+
+              background: "rgba(255,255,255,0.05)",
+
+              "&:hover": {
+                background: "rgba(255,255,255,0.1)",
+              },
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
+        {/* FORM */}
+
+        <Stack spacing={4}>
+          <Box>
+            <Typography
+              sx={{
+                color: "#fff",
+                mb: 1,
+                fontWeight: 600,
+              }}
+            >
+              Current Password
+            </Typography>
+
+            <TextField
+              fullWidth
               type="password"
               name="oldPassword"
+              placeholder="Enter current password"
               value={formData.oldPassword}
               onChange={handleChange}
+              sx={textFieldSx}
             />
+          </Box>
 
-            <Input
-              label="New Password"
+          <Box>
+            <Typography
+              sx={{
+                color: "#fff",
+                mb: 1,
+                fontWeight: 600,
+              }}
+            >
+              New Password
+            </Typography>
+
+            <TextField
+              fullWidth
               type="password"
               name="newPassword"
+              placeholder="Enter new password"
               value={formData.newPassword}
               onChange={handleChange}
+              sx={textFieldSx}
             />
+          </Box>
 
-            <Button type="submit">
-              Update Password
-            </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{
+              height: 56,
 
-          </div>
+              borderRadius: "18px",
 
-        </form>
+              background: "#06b6d4",
 
-      </div>
+              fontWeight: 800,
 
-    </DashboardLayout>
+              textTransform: "none",
+
+              fontSize: "17px",
+
+              boxShadow: "0 10px 30px rgba(6,182,212,0.35)",
+
+              "&:hover": {
+                background: "#22d3ee",
+              },
+            }}
+          >
+            Update Password
+          </Button>
+        </Stack>
+      </DialogContent>
+    </Dialog>
   );
 };
 
