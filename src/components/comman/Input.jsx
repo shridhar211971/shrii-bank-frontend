@@ -9,7 +9,7 @@ const Input = ({
   return (
     <div className="flex flex-col gap-3">
       
-      <label className="text-sm font-medium text-white">
+      <label className="text-sm font-medium text-[var(--body-text)]">
         {label}
       </label>
 
@@ -24,13 +24,13 @@ const Input = ({
           px-5
           py-4
           rounded-2xl
-          bg-transparent
+          bg-[var(--surface-soft)]
           border
-          border-white
+          border-[var(--border)]
           outline-none
-          text-white
-          placeholder:text-white
-          focus:border-white
+          text-[var(--body-text)]
+          placeholder:text-[var(--muted)]
+          focus:border-[var(--accent)]
           transition-all
         "
       />

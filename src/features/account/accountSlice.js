@@ -16,10 +16,16 @@ export const getMyAccounts = createAsyncThunk(
 
     try {
 
-      const response = await axiosInstance.get(
-        ENDPOINTS.ACCOUNTS.MY_ACCOUNTS
-      );
+      const token = localStorage.getItem("token");
 
+const response = await axiosInstance.get(
+  ENDPOINTS.ACCOUNTS.MY_ACCOUNTS,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
       // STORE USER INFO IN SESSION STORAGE
 
       const account =

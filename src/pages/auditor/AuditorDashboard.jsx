@@ -8,7 +8,7 @@ import AuditStatsCard from "../../components/cards/AuditStatsCard";
 
 import {
   getAuditTotals,
-} from "../../features/auditor/auditorThunk";
+} from "../../features/auditor/auditorSlice";
 import toast from "react-hot-toast";
 
 const AuditorDashboard = () => {
@@ -38,14 +38,14 @@ const AuditorDashboard = () => {
             className="
               text-5xl
               font-black
-              text-white
+              text-[var(--body-text)]
               mb-3
             "
           >
             Auditor Dashboard
           </h1>
 
-          <p className="text-slate-400">
+          <p className="text-[var(--muted)]">
             Monitor all banking activities
           </p>
 

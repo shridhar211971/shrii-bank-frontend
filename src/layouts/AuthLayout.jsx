@@ -5,7 +5,7 @@ const AuthLayout = ({ children }) => {
 
   return (
 
-    <div className="relative min-h-screen overflow-hidden bg-background text-white">
+    <div className="relative min-h-screen overflow-hidden bg-[var(--body-bg)] text-[var(--body-text)]">
 
       {/* GRID BACKGROUND */}
       <div className="absolute inset-0 bg-grid opacity-[0.08]" />
@@ -124,7 +124,7 @@ const AuthLayout = ({ children }) => {
 
             {/* DESCRIPTION */}
             <p className="
-              text-slate-300
+              text-[var(--muted)]
               text-xl
               leading-[1.8]
               max-w-2xl
@@ -150,14 +150,14 @@ const AuthLayout = ({ children }) => {
                 <h3 className="
                   text-4xl
                   font-black
-                  text-cyan-400
+                  text-[var(--accent)]
                 ">
                   24/7
                 </h3>
 
                 <p className="
                   mt-2
-                  text-slate-400
+                  text-[var(--muted)]
                 ">
                   Banking Support
                 </p>
@@ -169,14 +169,14 @@ const AuthLayout = ({ children }) => {
                 <h3 className="
                   text-4xl
                   font-black
-                  text-cyan-400
+                  text-[var(--accent)]
                 ">
                   99%
                 </h3>
 
                 <p className="
                   mt-2
-                  text-slate-400
+                  text-[var(--muted)]
                 ">
                   Secure Transactions
                 </p>
@@ -188,14 +188,14 @@ const AuthLayout = ({ children }) => {
                 <h3 className="
                   text-4xl
                   font-black
-                  text-cyan-400
+                  text-[var(--accent)]
                 ">
                   Fast
                 </h3>
 
                 <p className="
                   mt-2
-                  text-slate-400
+                  text-[var(--muted)]
                 ">
                   Money Transfers
                 </p>

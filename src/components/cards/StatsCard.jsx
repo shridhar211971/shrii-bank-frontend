@@ -7,18 +7,15 @@ const StatsCard = ({
   return (
     <div
       className="
-        bg-white/5
-        border
-        border-white/10
+        surface-card
         rounded-3xl
         p-8
-        backdrop-blur-xl
-        hover:border-cyan-400/40
+        hover:border-[var(--accent)]/40
         transition-all
-      "
+      " 
     >
 
-      <p className="text-slate-400 mb-4">
+      <p className="text-[var(--muted)] mb-4">
         {title}
       </p>
 
@@ -26,14 +23,14 @@ const StatsCard = ({
         className="
           text-5xl
           font-black
-          text-white
+          text-[var(--body-text)]
           mb-3
         "
       >
         {value}
       </h2>
 
-      <p className="text-cyan-400">
+      <p className="text-cyan-300">
         {subtitle}
       </p>
 

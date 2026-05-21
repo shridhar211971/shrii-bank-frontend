@@ -9,6 +9,7 @@ import {
   Stack,
   TextField,
   Typography,
+  Divider,
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -29,31 +30,23 @@ const ChangePassword = ({ open, handleClose, handleSubmitPassword }) => {
   const textFieldSx = {
     "& .MuiOutlinedInput-root": {
       height: 56,
-
       borderRadius: "18px",
-
-      color: "#fff",
-
-      background: "rgba(255,255,255,0.03)",
-
+      color: "var(--body-text)",
+      background: "var(--surface-soft)",
       "& fieldset": {
-        borderColor: "rgba(255,255,255,0.12)",
+        borderColor: "var(--border)",
       },
-
       "&:hover fieldset": {
-        borderColor: "#22d3ee",
+        borderColor: "var(--accent)",
       },
-
       "&.Mui-focused fieldset": {
-        borderColor: "#22d3ee",
+        borderColor: "var(--accent)",
         borderWidth: "2px",
       },
     },
-
     "& input": {
-      color: "#fff",
+      color: "var(--body-text)",
     },
-
     "& input::placeholder": {
       color: "#94a3b8",
       opacity: 1,
@@ -77,26 +70,27 @@ const ChangePassword = ({ open, handleClose, handleSubmitPassword }) => {
       maxWidth="sm"
       PaperProps={{
         sx: {
-          background: "linear-gradient(135deg,#071120,#0f172a)",
+          background: "var(--surface)",
 
-          border: "1px solid rgba(255,255,255,0.08)",
+          
 
           borderRadius: "32px",
 
           overflow: "hidden",
 
-          boxShadow: "0 25px 60px rgba(0,0,0,0.5)",
+          boxShadow: "var(--shadow)",
         },
       }}
     >
       <DialogContent
-        sx={{
-          p: {
-            xs: 3,
-            md: 5,
-          },
-        }}
-      >
+          sx={{
+            background: "var(--surface)",
+            color: "var(--body-text)",
+            // borderRadius: "28px",
+            p: 5,
+            position: "relative",
+          }}
+        >
         {/* HEADER */}
 
         <Box
@@ -109,32 +103,41 @@ const ChangePassword = ({ open, handleClose, handleSubmitPassword }) => {
             <Typography
               variant="h4"
               sx={{
-                color: "#fff",
+                color: "var(--body-text)",
                 fontWeight: 900,
-                mb: 1,
               }}
             >
               Change Password
             </Typography>
 
             <Typography
-              sx={{
-                color: "#94a3b8",
-              }}
+             sx={{
+              color: "var(--body-text)",
+              fontWeight: 700,
+            }}
             >
               Secure your banking account
             </Typography>
+             <Divider
+              sx={{
+                borderColor: "var(--border)",
+                mb: 4,
+              }}
+            />
           </Box>
 
-          <IconButton
+         <IconButton
             onClick={handleClose}
             sx={{
-              color: "#fff",
+              position: "absolute",
+              top: 20,
+              right: 20,
 
-              background: "rgba(255,255,255,0.05)",
+              background: "var(--surface-soft)",
+              color: "var(--body-text)",
 
               "&:hover": {
-                background: "rgba(255,255,255,0.1)",
+                background: "rgba(34,211,238,0.15)",
               },
             }}
           >
@@ -148,7 +151,7 @@ const ChangePassword = ({ open, handleClose, handleSubmitPassword }) => {
           <Box>
             <Typography
               sx={{
-                color: "#fff",
+                color: "var(--body-text)",
                 mb: 1,
                 fontWeight: 600,
               }}
@@ -170,7 +173,7 @@ const ChangePassword = ({ open, handleClose, handleSubmitPassword }) => {
           <Box>
             <Typography
               sx={{
-                color: "#fff",
+                color: "var(--body-text)",
                 mb: 1,
                 fontWeight: 600,
               }}
@@ -195,21 +198,14 @@ const ChangePassword = ({ open, handleClose, handleSubmitPassword }) => {
             onClick={handleSubmit}
             sx={{
               height: 56,
-
               borderRadius: "18px",
-
-              background: "#06b6d4",
-
+              background: "var(--accent)",
               fontWeight: 800,
-
               textTransform: "none",
-
               fontSize: "17px",
-
-              boxShadow: "0 10px 30px rgba(6,182,212,0.35)",
-
+              boxShadow: "0 10px 30px rgba(34,211,238,0.25)",
               "&:hover": {
-                background: "#22d3ee",
+                background: "rgba(34,211,238,0.95)",
               },
             }}
           >

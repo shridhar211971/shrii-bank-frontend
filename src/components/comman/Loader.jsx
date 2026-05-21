@@ -15,7 +15,7 @@ const Loader = () => {
           w-14
           h-14
           border-4
-          border-cyan-400
+          border-[var(--accent)]
           border-t-transparent
           rounded-full
           animate-spin

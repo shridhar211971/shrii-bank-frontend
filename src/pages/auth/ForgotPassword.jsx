@@ -47,28 +47,28 @@ const ForgotPassword = () => {
     "& .MuiOutlinedInput-root": {
       height: 56,
       borderRadius: "18px",
-      color: "#fff",
+      color: "var(--body-text)",
 
       "& fieldset": {
-        borderColor: "#fff",
+        borderColor: "var(--border)",
       },
 
       "&:hover fieldset": {
-        borderColor: "#fff",
+        borderColor: "var(--border)",
       },
 
       "&.Mui-focused fieldset": {
-        borderColor: "#22d3ee",
+        borderColor: "var(--accent)",
         borderWidth: "2px",
       },
     },
 
     "& input": {
-      color: "#fff",
+      color: "var(--body-text)",
     },
 
     "& input::placeholder": {
-      color: "#fff",
+      color: "var(--muted)",
       opacity: 1,
     },
   };
@@ -91,16 +91,16 @@ const ForgotPassword = () => {
             maxWidth: "620px",
             borderRadius: "32px",
             p: { xs: 3, sm: 5, md: 6 },
-            background: "rgba(255,255,255,0.05)",
+            background: "var(--surface-soft)",
             backdropFilter: "blur(24px)",
-            border: "1px solid rgba(255,255,255,0.08)",
+            border: "1px solid var(--border)",
           }}
         >
           <Typography
             variant="h2"
             sx={{
               fontWeight: 900,
-              color: "#fff",
+              color: "var(--body-text)",
               mb: 1,
               fontSize: {
                 xs: "2.5rem",
@@ -115,7 +115,7 @@ const ForgotPassword = () => {
 
           <Typography
             sx={{
-              color: "#94a3b8",
+              color: "var(--muted)",
               mb: 5,
               fontSize: {
                 xs: "14px",
@@ -131,9 +131,7 @@ const ForgotPassword = () => {
               <Typography
                 sx={{
                   mb: 1,
-                  color: "#fff",
-                  fontSize: "18px",
-                  fontWeight: 500,
+                  color: "var(--body-text)",
                 }}
               >
                 Email Address
@@ -156,13 +154,15 @@ const ForgotPassword = () => {
               sx={{
                 height: 56,
                 borderRadius: "18px",
-                background: "#06b6d4",
+                background: "var(--accent)",
+                color: "var(--surface)",
                 fontSize: "18px",
                 fontWeight: 700,
                 textTransform: "none",
+                boxShadow: "0 16px 40px rgba(34,211,238,0.16)",
 
                 "&:hover": {
-                  background: "#22d3ee",
+                  background: "rgba(34,211,238,0.95)",
                 },
               }}
             >
@@ -171,7 +171,7 @@ const ForgotPassword = () => {
             <Typography
     align="center"
     sx={{
-      color: "#cbd5e1",
+      color: "var(--muted)",
     }}
   >
     Remember your password?
@@ -179,7 +179,7 @@ const ForgotPassword = () => {
     <Link
       to="/login"
       style={{
-        color: "#22d3ee",
+        color: "var(--accent)",
         marginLeft: "8px",
         textDecoration: "none",
       }}

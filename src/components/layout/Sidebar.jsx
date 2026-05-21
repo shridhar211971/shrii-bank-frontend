@@ -46,34 +46,33 @@ const Sidebar = ({ isOpen }) => {
   return (
     <aside
       className={`
-        bg-[#071028]
+        sticky
+        top-0
+        h-screen
+        bg-[var(--surface)]
         border-r
-        border-white/10
-        min-h-screen
+        border-[var(--border)]
         transition-all
         duration-300
         overflow-hidden
 
-        ${isOpen ? "w-[250px]" : "w-[55px]"}
+        ${isOpen ? "w-[250px]" : "w-[60px]"}
       `}
     >
       {/* LOGO */}
 
-      <div className="py-8 px-5 border-b border-white/10 mb-4">
+      <div className="py-8 px-5 border-b border-[var(--border)] mb-6">
         <div className="flex flex-col items-center mb-4">
           <img
             src={Shriilogo}
             alt="Shrii Bank"
-            className="w-20 h-20 object-contain"
+            className="w-30 h-35 object-contain"
           />
 
           {isOpen && (
             <>
-              <p className="text-cyan-400 text-4xl font-black mt-5">
-                SHRII BANK
-              </p>
-
-              <p className="text-slate-400 text-sm mt-3">
+            
+              <p className="text-[var(--muted)] text-sm mt-3" style={{marginBottom: "10px"}}>
                 Modern Banking Platform
               </p>
             </>
@@ -84,11 +83,12 @@ const Sidebar = ({ isOpen }) => {
 
       {/* NAV */}
 
-      <nav className="mt-12 p-4 space-y-3">
+      <nav className="mt-12 p-6 space-y-4">
         {navItems.map((item) => (
           <NavLink
             key={item.title}
             to={item.path}
+            style={{marginBottom: "10px", marginTop: "10px"}}
             className={({ isActive }) => `
               flex
               items-center
@@ -103,16 +103,16 @@ const Sidebar = ({ isOpen }) => {
               ${
                 isActive
                   ? `
-                    bg-cyan-500
+                    bg-[var(--accent)]
                     text-black
-                    border-cyan-400
+                    border-[var(--accent)]
                     font-semibold
                   `
                   : `
-                    border-white/10
-                    text-slate-300
-                    hover:bg-white/5
-                    hover:border-cyan-400/40
+                    border-[var(--border)]
+                    text-[var(--body-text)]
+                    hover:bg-[var(--surface-soft)]
+                    hover:border-[var(--border)]
                   `
               }
             `}
@@ -120,7 +120,7 @@ const Sidebar = ({ isOpen }) => {
             {item.icon}
 
             {isOpen && (
-              <span className="text-[17px]">
+              <span className="text-[17px]" >
                 {item.title}
               </span>
             )}

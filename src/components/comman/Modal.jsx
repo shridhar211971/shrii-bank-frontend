@@ -22,10 +22,7 @@ const Modal = ({
 
       <div
         className="
-          bg-[#091120]
-          border
-          border-white/10
-          rounded-3xl
+          surface-card-strong
           p-8
           w-full
           max-w-lg
@@ -45,7 +42,7 @@ const Modal = ({
             className="
               text-2xl
               font-bold
-              text-white
+              text-[var(--body-text)]
             "
           >
             {title}
@@ -54,8 +51,8 @@ const Modal = ({
           <button
             onClick={onClose}
             className="
-              text-slate-400
-              hover:text-white
+              text-[var(--muted)]
+              hover:text-[var(--body-text)]
             "
           >
             ✕

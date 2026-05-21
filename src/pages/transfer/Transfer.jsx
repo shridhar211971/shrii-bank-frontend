@@ -55,28 +55,28 @@ const Transfer = () => {
 
       height: 56,
       borderRadius: "18px",
-      color: "#fff",
+      color: "var(--body-text)",
 
       "& fieldset": {
-        borderColor: "#fff",
+        borderColor: "var(--border)",
       },
 
       "&:hover fieldset": {
-        borderColor: "#fff",
+        borderColor: "var(--border)",
       },
 
       "&.Mui-focused fieldset": {
-        borderColor: "#22d3ee",
+        borderColor: "var(--accent)",
         borderWidth: "2px",
       },
     },
 
     "& input": {
-      color: "#fff",
+      color: "var(--body-text)",
     },
 
     "& input::placeholder": {
-      color: "#fff",
+      color: "var(--muted)",
       opacity: 1,
     },
   };
@@ -176,7 +176,7 @@ const Transfer = () => {
           <Typography
             variant="h4"
             sx={{
-              color: "#fff",
+              color: "var(--body-text)",
               fontWeight: 900,
               mb: 1,
             }}
@@ -198,7 +198,7 @@ const Transfer = () => {
 
         {/* GRID */}
 
-        <Grid container spacing={18}>
+        <Grid container spacing={6}>
 
           {/* TRANSFER */}
 
@@ -210,20 +210,17 @@ const Transfer = () => {
               elevation={0}
               sx={{
                 borderRadius: "32px",
-                marginLeft: { xs: 0, lg: 14 },
                 p: 4,
-                background:
-                  "rgba(255,255,255,0.05)",
+                background: "var(--surface-soft)",
                 backdropFilter: "blur(24px)",
-                border:
-                  "1px solid rgba(255,255,255,0.08)",
+                border: "1px solid var(--border)",
               }}
             >
 
               <Typography
                 variant="h4"
                 sx={{
-                  color: "#fff",
+                  color: "var(--body-text)",
                   fontWeight: 900,
                   mb: 1,
                 }}
@@ -307,18 +304,16 @@ const Transfer = () => {
               sx={{
                 borderRadius: "32px",
                 p: 4,
-                background:
-                  "rgba(255,255,255,0.05)",
+                background: "var(--surface-soft)",
                 backdropFilter: "blur(24px)",
-                border:
-                  "1px solid rgba(255,255,255,0.08)",
+                border: "1px solid var(--border)",
               }}
             >
 
               <Typography
                 variant="h4"
                 sx={{
-                  color: "#fff",
+                  color: "var(--body-text)",
                   fontWeight: 800,
                   mb: 4,
                 }}

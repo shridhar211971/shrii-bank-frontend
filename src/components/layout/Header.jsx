@@ -8,15 +8,21 @@ import {
   Menu,
   X,
   LogOut,
+  Moon,
+  Sun,
 } from "lucide-react";
 
 import toast from "react-hot-toast";
+
+import { useTheme } from "../../hooks/useTheme";
 
 const Header = ({ isOpen, setIsOpen }) => {
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const { mode, toggleTheme } = useTheme();
 
   // USER FROM SESSION STORAGE
 
@@ -45,14 +51,23 @@ const Header = ({ isOpen, setIsOpen }) => {
   return (
     <header
       className="
+        sticky
+        top-0
+        z-20
         h-[90px]
         border-b
-        border-white/10
-        bg-[#091120]
+        border-[var(--border)]
+        bg-[var(--surface)]
+        text-[var(--body-text)]
         flex
+        flex-col md:flex-row
         items-center
         justify-between
-        px-8 lg:px-10
+        gap-4
+        px-4 md:px-6 lg:px-10
+        transition-colors
+        duration-300
+        backdrop-blur-xl
       "
     >
       {/* LEFT */}
@@ -69,8 +84,8 @@ const Header = ({ isOpen, setIsOpen }) => {
             w-12
             h-12
             rounded-xl
-            bg-cyan-500
-            text-black
+            bg-[var(--accent)]
+            text-[var(--surface)]
             flex
             items-center
             justify-center
@@ -91,7 +106,7 @@ const Header = ({ isOpen, setIsOpen }) => {
             className="
               text-3xl
               font-bold
-              text-white
+              text-[var(--body-text)]
             "
           >
             Welcome Back 👋
@@ -99,7 +114,7 @@ const Header = ({ isOpen, setIsOpen }) => {
 
           <p
             className="
-              text-slate-400
+              text-[var(--muted)]
               text-sm
               mt-1
             "
@@ -115,18 +130,41 @@ const Header = ({ isOpen, setIsOpen }) => {
       <div
         className="
           flex
+          flex-col md:flex-row
           items-center
-          gap-6
-          pr-8
+          gap-4 md:gap-6
+          pr-0 md:pr-8
         "
       >
+        <button
+          onClick={toggleTheme}
+          className="
+            w-12
+            h-12
+            rounded-xl
+            text-[var(--body-text)]
+            flex
+            items-center
+            justify-center
+            hover:scale-105
+            transition-all
+          "
+          aria-label="Toggle light and dark mode"
+        >
+          {mode === "dark" ? (
+            <Sun size={20} />
+          ) : (
+            <Moon size={20} />
+          )}
+        </button>
+
         {/* USER INFO */}
 
         <div className="text-right">
 
           <p
             className="
-              text-white
+              text-[var(--body-text)]
               font-semibold
               text-lg
             "
@@ -137,7 +175,7 @@ const Header = ({ isOpen, setIsOpen }) => {
 
           <p
             className="
-              text-cyan-400
+              text-[var(--accent)]
               text-sm
             "
           >
@@ -147,7 +185,7 @@ const Header = ({ isOpen, setIsOpen }) => {
 
           <p
             className="
-              text-slate-400
+              text-[var(--muted)]
               text-xs
               mt-1
             "
@@ -168,12 +206,12 @@ const Header = ({ isOpen, setIsOpen }) => {
             h-14
             rounded-full
             bg-gradient-to-br
-            from-cyan-400
+            from-[var(--accent)]
             to-blue-600
             flex
             items-center
             justify-center
-            text-white
+            text-[var(--surface)]
             font-bold
             text-xl
           "

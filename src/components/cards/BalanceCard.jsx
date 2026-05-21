@@ -2,16 +2,13 @@ const BalanceCard = ({ balance }) => {
   return (
     <div
       className="
-        bg-white/5
-        border
-        border-white/10
+        surface-card
         rounded-3xl
         p-8
-        backdrop-blur-xl
       "
     >
 
-      <p className="text-slate-400 mb-3">
+      <p className="text-[var(--muted)] mb-3">
         Total Balance
       </p>
 
@@ -19,7 +16,7 @@ const BalanceCard = ({ balance }) => {
         className="
           text-4xl
           font-black
-          text-white
+          text-[var(--body-text)]
         "
       >
         ₹{balance}

@@ -14,21 +14,13 @@ const TransactionChart = ({ transactions }) => {
   }));
 
   return (
-    <div
-      className="
-        bg-white/5
-        border
-        border-white/10
-        rounded-[32px]
-        p-6
-      "
-    >
-      <div className="mb-6">
-        <h2 className="text-2xl font-black text-white">
+    <div className="surface-card rounded-[32px] p-6 mb-6">
+      <div className="mb-6" style={{marginLeft: "10px", marginTop: "10px"}}>
+        <h2 className="text-2xl font-black text-[var(--body-text)]">
           Transaction Analytics
         </h2>
 
-        <p className="text-slate-400 mt-1">
+        <p className="text-[var(--muted)] mt-1">
           Financial activity overview
         </p>
       </div>
