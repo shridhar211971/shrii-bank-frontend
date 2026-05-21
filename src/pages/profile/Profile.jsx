@@ -83,10 +83,10 @@ const Profile = () => {
     }
   };
 
-  if (loading && !profile) {
+  if (loading || !profile || !accounts?.length) {
     return (
       <DashboardLayout>
-        <Box display="flex" justifyContent="center" mt={10}>
+        <Box display="flex" justifyContent="center" alignItems="center"  minHeight="80vh">
           <CircularProgress />
         </Box>
       </DashboardLayout>
@@ -95,14 +95,14 @@ const Profile = () => {
 
   return (
   <DashboardLayout>
-    <Box>
+    <Box  sx={{ width: "100%" }}>
       {/* HEADER */}
 
       <Box mb={5}>
         <Typography
           variant="h4"
           sx={{
-            color: "#fff",
+            color: "var(--body-text)",
             fontWeight: 900,
             mb: 1,
           }}
@@ -112,7 +112,7 @@ const Profile = () => {
 
         <Typography
           sx={{
-            color: "#94a3b8",
+            color: "var(--muted)",
             fontSize: "16px",
           }}
         >
@@ -122,12 +122,13 @@ const Profile = () => {
 
       {/* ================= TOP SECTION ================= */}
 
-      <Grid container spacing={4}>
+      <Grid container spacing={3}  alignItems="stretch">
         {/* PROFILE CARD */}
 
-        <Grid item xs={12} lg={4.8}>
+        <Grid item xs={12} md={4} display="flex">
           <Paper
             elevation={0}
+            
             sx={{
               p: {
                 xs: 3,
@@ -135,12 +136,14 @@ const Profile = () => {
               },
               borderRadius: "32px",
               height: "100%",
-              background: "rgba(255,255,255,0.04)",
+              minHeight: 420,
+              width: "100%",
+              background: "var(--surface-soft)",
               backdropFilter: "blur(24px)",
-              border: "1px solid rgba(255,255,255,0.08)",
+              border: "1px solid var(--border)",
             }}
           >
-            <Stack alignItems="center" spacing={3}>
+            <Stack  spacing={3}>
               <Avatar
                 src={
                   profile?.profilePictureUrl
@@ -149,18 +152,18 @@ const Profile = () => {
                 }
                 sx={{
                   width: {
-                    xs: 150,
-                    sm: 220,
-                    md: 250,
+                    xs: 140,
+                    sm: 180,
+                    md: 200,
                   },
                   height: {
-                    xs: 150,
-                    sm: 220,
-                    md: 250,
+                    xs: 140,
+                    sm: 180,
+                    md: 200,
                   },
-                  border: "4px solid rgba(6,182,212,0.4)",
+                  border: "4px solid rgba(34,211,238,0.35)",
                   background:
-                    "linear-gradient(135deg,#06b6d4,#2563eb)",
+                    "linear-gradient(135deg,var(--accent),#2563eb)",
                   fontSize: {
                     xs: "50px",
                     md: "70px",
@@ -204,19 +207,21 @@ const Profile = () => {
 
         {/* ACCOUNT DETAILS */}
 
-        <Grid item xs={12} lg={7.2}>
+        <Grid item xs={12} md={8} display="flex">
           <Paper
             elevation={0}
             sx={{
+              width: "100%",
               p: {
                 xs: 3,
                 md: 5,
               },
               borderRadius: "32px",
               height: "100%",
-              background: "rgba(255,255,255,0.04)",
+              minHeight: 420,
+              background: "var(--surface-soft)",
               backdropFilter: "blur(24px)",
-              border: "1px solid rgba(255,255,255,0.08)",
+              border: "1px solid var(--border)",
             }}
           >
             <Stack spacing={4}>
@@ -226,7 +231,7 @@ const Profile = () => {
                 <Typography
                   variant="h4"
                   sx={{
-                    color: "#fff",
+                    color: "var(--body-text)",
                     fontWeight: 900,
                     mb: 1,
                     fontSize: {
@@ -240,7 +245,7 @@ const Profile = () => {
 
                 <Typography
                   sx={{
-                    color: "#94a3b8",
+                    color: "var(--muted)",
                   }}
                 >
                   {profile?.email}
@@ -249,7 +254,7 @@ const Profile = () => {
 
               <Divider
                 sx={{
-                  borderColor: "rgba(255,255,255,0.08)",
+                  borderColor: "var(--border)",
                 }}
               />
 
@@ -380,15 +385,13 @@ const Profile = () => {
                     sm: "260px",
                   },
 
-                  color: "#fff",
+                  color: "var(--body-text)",
 
-                  border:
-                    "1px solid rgba(255,255,255,0.15)",
+                  border: "1px solid var(--border)",
 
                   "&:hover": {
-                    border: "1px solid #22d3ee",
-                    background:
-                      "rgba(6,182,212,0.08)",
+                    border: "1px solid var(--accent)",
+                    background: "rgba(6,182,212,0.08)",
                   },
                 }}
               >
@@ -411,9 +414,9 @@ const Profile = () => {
                 md: 5,
               },
               borderRadius: "32px",
-              background: "rgba(255,255,255,0.04)",
+              background: "var(--surface-soft)",
               backdropFilter: "blur(24px)",
-              border: "1px solid rgba(255,255,255,0.08)",
+              border: "1px solid var(--border)",
             }}
           >
             {/* HEADER */}
@@ -422,7 +425,7 @@ const Profile = () => {
               <Typography
                 variant="h4"
                 sx={{
-                  color: "#fff",
+                  color: "var(--body-text)",
                   fontWeight: 900,
                   mb: 1,
                   fontSize: {
@@ -436,7 +439,7 @@ const Profile = () => {
 
               <Typography
                 sx={{
-                  color: "#94a3b8",
+                  color: "var(--muted)",
                 }}
               >
                 {profile?.email}
@@ -445,7 +448,7 @@ const Profile = () => {
 
             <Divider
               sx={{
-                borderColor: "rgba(255,255,255,0.08)",
+                borderColor: "var(--border)",
                 mb: 4,
               }}
             />
@@ -571,14 +574,14 @@ const infoCard = {
   p: 3,
   height: "100%",
   borderRadius: "24px",
-  background: "rgba(255,255,255,0.03)",
-  border: "1px solid rgba(255,255,255,0.06)",
+  background: "var(--surface-soft)",
+  border: "1px solid var(--border)",
 
   transition: "0.3s",
 
   "&:hover": {
     transform: "translateY(-4px)",
-    border: "1px solid rgba(34,211,238,0.3)",
+    border: "1px solid var(--accent)",
   },
 };
 
@@ -599,7 +602,7 @@ const iconBox = {
 // LABEL STYLE
 
 const labelStyle = {
-  color: "#94a3b8",
+  color: "var(--muted)",
   fontSize: "14px",
   mb: 0.5,
 };
@@ -607,7 +610,7 @@ const labelStyle = {
 // VALUE STYLE
 
 const valueStyle = {
-  color: "#fff",
+  color: "var(--body-text)",
   fontWeight: 700,
   fontSize: "18px",
 };

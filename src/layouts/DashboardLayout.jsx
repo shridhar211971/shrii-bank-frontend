@@ -13,18 +13,16 @@ const DashboardLayout = ({ children }) => {
       className="
         flex
         gap-4
-        min-h-screen
-        bg-gradient-to-br
-        from-[#020817]
-        via-[#0a1525]
-        to-[#020817]
-      "
+        h-screen
+        overflow-hidden
+        bg-[var(--body-bg)]
+        text-[var(--body-text)]
+      " 
+      style={{marginRight: "10px", marginLeft: "1px"}}
     >
       {/* SIDEBAR */}
 
-      <Sidebar
-        isOpen={isOpen}
-      />
+      <Sidebar isOpen={isOpen} />
 
       {/* MAIN CONTENT */}
 
@@ -36,27 +34,29 @@ const DashboardLayout = ({ children }) => {
           min-w-0
           transition-all
           duration-300
-      
+          overflow-hidden
         "
+        // style={{marginRight: "10px", marginLeft: "1px"}}
       >
         {/* HEADER */}
 
-        <Header
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
+        <Header isOpen={isOpen} setIsOpen={setIsOpen}  />
 
         {/* PAGE CONTENT */}
 
         <main
           className="
             flex-1
-            p-6
+            p-4
+            md:p-6
             lg:p-10
+            pt-[100px]
+            pb-6
             overflow-auto
           "
+          style={{ WebkitOverflowScrolling: 'touch'}}
         >
-          <div className="max-w-full mx-auto">
+          <div>
             {children}
           </div>
         </main>

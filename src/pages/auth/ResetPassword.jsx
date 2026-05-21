@@ -3,8 +3,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetPassword } from "../../features/auth/authSlice";
 import AuthLayout from "../../layouts/AuthLayout";
-import Input from "../../components/comman/Input";
-import Button from "../../components/comman/Button";
+import {
+  Box,
+  Button,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import toast from "react-hot-toast";
 
 const ResetPassword = () => {
@@ -31,75 +37,138 @@ const ResetPassword = () => {
 
     try {
       const result = await dispatch(resetPassword(formData)).unwrap();
-      console.log("Reset password result:", result);
-
-      // Handle both direct response and nested data structure
       const message = result?.message || result?.data?.message || "Password reset successful! Please login.";
       toast.success(message);
 
       navigate("/login");
     } catch (error) {
-      console.log("Reset password error:", error);
       toast.error(error || "Failed to reset password");
     }
   };
 
+  const textFieldSx = {
+    "& .MuiOutlinedInput-root": {
+      height: 56,
+      borderRadius: "18px",
+      color: "var(--body-text)",
+      "& fieldset": {
+        borderColor: "var(--border)",
+      },
+      "&:hover fieldset": {
+        borderColor: "var(--border)",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "var(--accent)",
+        borderWidth: "2px",
+      },
+    },
+    "& input": {
+      color: "var(--body-text)",
+    },
+    "& input::placeholder": {
+      color: "var(--muted)",
+      opacity: 1,
+    },
+  };
+
   return (
     <AuthLayout>
-
-      <form
-        onSubmit={handleSubmit}
-        className="
-          w-full
-          max-w-md
-          bg-white/5
-          border
-          border-white/10
-          rounded-3xl
-          p-10
-        "
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+        px={2}
       >
-
-        <h2
-          className="
-            text-4xl
-            font-black
-            text-white
-            mb-3
-          "
+        <Paper
+          component="form"
+          onSubmit={handleSubmit}
+          elevation={0}
+          sx={{
+            width: "100%",
+            maxWidth: "620px",
+            borderRadius: "32px",
+            p: { xs: 3, sm: 5, md: 6 },
+            background: "var(--surface-soft)",
+            backdropFilter: "blur(24px)",
+            border: "1px solid var(--border)",
+          }}
         >
-          Reset Password
-        </h2>
-
-        <p className="text-slate-400 mb-8">
-          Enter code and new password
-        </p>
-
-        <div className="space-y-6">
-
-          <Input
-            label="Reset Code"
-            name="code"
-            value={formData.code}
-            onChange={handleChange}
-          />
-
-          <Input
-            label="New Password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-
-          <Button type="submit">
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 900,
+              color: "var(--body-text)",
+              mb: 1,
+              fontSize: {
+                xs: "2.5rem",
+                sm: "3.5rem",
+                md: "4rem",
+              },
+              lineHeight: 1,
+            }}
+          >
             Reset Password
-          </Button>
+          </Typography>
 
-        </div>
+          <Typography
+            sx={{
+              color: "var(--muted)",
+              mb: 5,
+              fontSize: {
+                xs: "14px",
+                sm: "16px",
+              },
+            }}
+          >
+            Enter your reset code and new password.
+          </Typography>
 
-      </form>
+          <Stack spacing={4}>
+            <TextField
+              fullWidth
+              name="code"
+              label="Reset Code"
+              placeholder="Enter reset code"
+              value={formData.code}
+              onChange={handleChange}
+              sx={textFieldSx}
+            />
 
+            <TextField
+              fullWidth
+              type="password"
+              name="password"
+              label="New Password"
+              placeholder="Enter new password"
+              value={formData.password}
+              onChange={handleChange}
+              sx={textFieldSx}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                height: 56,
+                borderRadius: "18px",
+                background: "var(--accent)",
+                color: "var(--surface)",
+                fontSize: "18px",
+                fontWeight: 700,
+                textTransform: "none",
+                boxShadow: "0 16px 40px rgba(34,211,238,0.16)",
+                "&:hover": {
+                  background: "rgba(34,211,238,0.95)",
+                },
+              }}
+            >
+              Reset Password
+            </Button>
+          </Stack>
+        </Paper>
+      </Box>
     </AuthLayout>
   );
 };

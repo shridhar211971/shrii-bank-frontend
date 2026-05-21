@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 
 import { store } from "./app/store";
 import { initializeAuth } from "./features/auth/authSlice";
+import { ThemeProvider } from "./hooks/useTheme";
 
 // Initialize auth from localStorage on app load
 store.dispatch(initializeAuth());
@@ -19,8 +20,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
-        <Toaster position="top-right" />
+        <ThemeProvider>
+          <App />
+          <Toaster position="top-right" />
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

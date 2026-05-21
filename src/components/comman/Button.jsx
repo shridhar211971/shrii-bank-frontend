@@ -15,11 +15,11 @@ const Button = ({
         py-3
         rounded-xl
         font-semibold
-        bg-cyan-500
-        hover:bg-cyan-400
+        bg-[var(--accent)]
+        hover:brightness-110
         transition-all
         duration-300
-        text-white
+        text-[var(--surface)]
         disabled:opacity-50
         ${className}
       `}

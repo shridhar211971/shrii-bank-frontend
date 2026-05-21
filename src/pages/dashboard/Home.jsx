@@ -17,6 +17,8 @@ import {
   CreditCard,
 } from "lucide-react";
 
+import { Typography, Box } from "@mui/material";
+
 import TransactionChart from "../../components/charts/TransactionChart";
 import ExpenseChart from "../../components/charts/ExpenseChart";
 
@@ -25,7 +27,7 @@ const Home = () => {
 
   const { accounts, loading } = useSelector((state) => state.account);
 
-  const { profile } = useSelector((state) => state.profile);
+  // const { profile } = useSelector((state) => state.profile);
 
   useEffect(() => {
     dispatch(getMyAccounts())
@@ -60,7 +62,7 @@ const Home = () => {
     return (
       <DashboardLayout>
         <div className="flex justify-center items-center h-[70vh]">
-          <h1 className="text-white text-3xl font-bold">
+          <h1 className="text-[var(--body-text)] text-3xl font-bold">
             Loading Dashboard...
           </h1>
         </div>
@@ -70,262 +72,232 @@ const Home = () => {
 
   return (
     <DashboardLayout>
-      <div className="space-y-8">
-        {/* HEADER */}
+      <>
+        <div className="space-y-10">
+          {/* HEADER */}
 
-        <div
-          className="
+          <div
+            className="
             flex
             flex-col
             lg:flex-row
             lg:items-center
             lg:justify-between
             gap-6
+            mb
           "
-        >
-          <div className="flex items-center gap-5">
-            <img
-              src={`http://localhost:8080/${profile?.profilePictureUrl}`}
-              alt="profile"
-              className="
-                w-20
-                h-20
-                rounded-3xl
-                object-cover
-                border-4
-                border-cyan-500/40
-              "
-            />
-
-            <div>
-              <h1
-                className="
-                  text-4xl
-                  lg:text-5xl
-                  font-black
-                  text-white
-                "
+            // style={{marginBottom: "10px"}}
+          >
+            <Box mb={5}>
+              <Typography
+                variant="h4"
+                sx={{
+                  color: "var(--body-text)",
+                  fontWeight: 900,
+                  mb: 1,
+                }}
               >
-                Welcome Back 👋
-              </h1>
+                My Dashboard
+              </Typography>
 
-              <p className="text-slate-400 text-lg mt-2">
-                {profile?.firstName} {profile?.lastName}
-              </p>
-            </div>
+              <Typography
+                sx={{
+                  color: "var(--muted)",
+                  fontSize: "16px",
+                  mb: 1,
+                }}
+              >
+                Review your recent banking activities
+              </Typography>
+            </Box>
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            <button
-              className="
-                px-6 py-3
-                rounded-2xl
-                bg-gradient-to-r
-                from-cyan-500
-                to-blue-600
-                text-white
-                font-semibold
-                hover:scale-105
-                transition-all
-              "
-            >
-              Quick Transfer
-            </button>
+          {/* BALANCE CARD */}
 
-            <button
-              className="
-                px-6 py-3
-                rounded-2xl
-                bg-white/5
-                border
-                border-white/10
-                text-white
-                font-semibold
-                hover:bg-white/10
-                transition-all
-              "
-            >
-              View Reports
-            </button>
-          </div>
-        </div>
-
-        {/* BALANCE CARD */}
-
-        <div
-          className="
+          <div
+            className="
             relative
             overflow-hidden
-            rounded-[35px]
+            rounded-[20px]
             p-8
             md:p-10
+            margin-top: 20px
             bg-gradient-to-br
             from-cyan-500
             via-blue-600
             to-indigo-700
           "
-        >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+            style={{ marginBottom: "20px" }}
+          >
+            <div className="absolute top-0 right-4 w-80 h-80 bg-white/10 rounded-full blur-3xl ml-4"/>
 
-          <div className="relative z-10">
-            <p className="text-cyan-100 text-lg mb-4">
-              Total Available Balance
-            </p>
+            <div className="relative z-10 "  style={{marginLeft: "10px", marginTop: "10px", marginBottom: "10px"}}>
+              <p className="text-cyan-100 text-lg mb-4 ">
+                Total Available Balance
+              </p>
 
-            <h1
-              className="
+              <h1
+                className="
                 text-5xl
                 md:text-6xl
                 font-black
                 text-white
               "
-            >
-              ₹ {totalBalance.toLocaleString()}
-            </h1>
+              >
+                ₹ {totalBalance.toLocaleString()}
+              </h1>
 
-            <div
-              className="
+              <div
+                className="
                 grid
                 grid-cols-2
                 md:grid-cols-4
                 gap-6
                 mt-10
               "
-            >
-              <div>
-                <p className="text-cyan-100 text-sm">Account Number</p>
+              >
+                <div>
+                  <p className="text-cyan-100 text-sm">Account Number</p>
 
-                <h3 className="text-white font-bold text-xl mt-1">
-                  {account?.accountNumber}
-                </h3>
-              </div>
+                  <h3 className="text-white font-bold text-xl mt-1">
+                    {account?.accountNumber}
+                  </h3>
+                </div>
 
-              <div>
-                <p className="text-cyan-100 text-sm">Account Type</p>
+                <div>
+                  <p className="text-cyan-100 text-sm">Account Type</p>
 
-                <h3 className="text-white font-bold text-xl mt-1">
-                  {account?.accountType}
-                </h3>
-              </div>
+                  <h3 className="text-white font-bold text-xl mt-1">
+                    {account?.accountType}
+                  </h3>
+                </div>
 
-              <div>
-                <p className="text-cyan-100 text-sm">Currency</p>
+                <div>
+                  <p className="text-cyan-100 text-sm">Currency</p>
 
-                <h3 className="text-white font-bold text-xl mt-1">
-                  {account?.currency}
-                </h3>
-              </div>
+                  <h3 className="text-white font-bold text-xl mt-1">
+                    {account?.currency}
+                  </h3>
+                </div>
 
-              <div>
-                <p className="text-cyan-100 text-sm">Status</p>
+                <div>
+                  <p className="text-cyan-100 text-sm">Status</p>
 
-                <h3 className="text-green-300 font-bold text-xl mt-1">
-                  {account?.status}
-                </h3>
+                  <h3 className="text-green-300 font-bold text-xl mt-1">
+                    {account?.status}
+                  </h3>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* STATS */}
+          {/* STATS */}
 
-        <div
-          className="
+          <div
+            className="
             grid
             grid-cols-1
             sm:grid-cols-2
             xl:grid-cols-4
-            gap-6
+            gap-4
           "
-        >
-          <StatsCard
-            title="Total Balance"
-            value={`₹ ${totalBalance.toLocaleString()}`}
-            icon={<Wallet size={28} />}
-            color="cyan"
-          />
+            style={{ marginBottom: "20px" }}
+          >
+            <StatsCard
+              title="Total Balance"
+              value={`₹ ${totalBalance.toLocaleString()}`}
+              icon={<Wallet size={28} />}
+              color="cyan"
+              
+            />
 
-          <StatsCard
-            title="Deposits"
-            value={`₹ ${totalDeposit.toLocaleString()}`}
-            icon={<ArrowDownCircle size={28} />}
-            color="green"
-          />
+            <StatsCard
+              title="Deposits"
+              value={`₹ ${totalDeposit.toLocaleString()}`}
+              icon={<ArrowDownCircle size={28} />}
+              color="green"
+            />
 
-          <StatsCard
-            title="Withdrawals"
-            value={`₹ ${totalWithdrawal.toLocaleString()}`}
-            icon={<ArrowUpCircle size={28} />}
-            color="red"
-          />
+            <StatsCard
+              title="Withdrawals"
+              value={`₹ ${totalWithdrawal.toLocaleString()}`}
+              icon={<ArrowUpCircle size={28} />}
+              color="red"
+            />
 
-          <StatsCard
-            title="Transfers"
-            value={`₹ ${totalTransfer.toLocaleString()}`}
-            icon={<TrendingUp size={28} />}
-            color="orange"
-          />
-        </div>
+            <StatsCard
+              title="Transfers"
+              value={`₹ ${totalTransfer.toLocaleString()}`}
+              icon={<TrendingUp size={28} />}
+              color="orange"
+            />
+          </div>
 
-        {/* CHARTS */}
+          {/* CHARTS */}
 
-        <div
-          className="
+          <div
+            className="
             grid
             grid-cols-1
             xl:grid-cols-2
             gap-6
           "
-        >
-          <TransactionChart transactions={transactions} />
+            style={{ marginBottom: "20px" }}
+          >
+            <TransactionChart transactions={transactions} />
 
-          <ExpenseChart
-            depositAmount={totalDeposit}
-            withdrawalAmount={totalWithdrawal}
-            transferAmount={totalTransfer}
-          />
-        </div>
+            <ExpenseChart
+              depositAmount={totalDeposit}
+              withdrawalAmount={totalWithdrawal}
+              transferAmount={totalTransfer}
+            />
+          </div>
 
-        {/* RECENT TRANSACTIONS */}
+          {/* RECENT TRANSACTIONS */}
 
-        <div
-          className="
-            bg-white/5
-            border
-            border-white/10
+          <div
+            className="
+            surface-card
             rounded-[35px]
             p-6
-            backdrop-blur-xl
           "
-        >
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-black text-white">
-              Recent Transactions
-            </h2>
-
+          style={{marginBottom:"20px"}}
+          >
             <div
-              className="
+              className="flex items-center justify-between mb-8 flex-wrap gap-4"
+              style={{ marginBottom: "20px", marginTop: "15px" }}
+            >
+              <h2
+                className="text-3xl font-black text-[var(--body-text)]"
+                style={{ marginLeft: "20px" }}
+              >
+                Recent Transactions
+              </h2>
+
+              <div
+                className="
                 px-4 py-2
                 rounded-xl
-                bg-cyan-500/10
-                text-cyan-400
+                bg-[var(--accent)]/10
+                text-[var(--accent)]
                 text-sm
                 font-semibold
               "
-            >
-              {transactions.length} Transactions
+                style={{ marginRight: "20px" }}
+              >
+                {transactions.length} Transactions
+              </div>
             </div>
-          </div>
 
-          <div className="space-y-4">
-            {transactions
-              ?.slice()
-              ?.reverse()
-              ?.slice(0, 7)
-              ?.map((txn) => (
-                <div
-                  key={txn.id}
-                  className="
+            <div className="space-y-4">
+              {transactions
+                ?.slice()
+                ?.reverse()
+                ?.slice(0, 7)
+                ?.map((txn) => (
+                  <div
+                    key={txn.id}
+                    className="
                     flex
                     flex-col
                     md:flex-row
@@ -334,18 +306,18 @@ const Home = () => {
                     gap-4
                     p-5
                     rounded-3xl
-                    bg-white/[0.03]
+                    bg-[var(--surface-soft)]
                     border
-                    border-white/5
-                    hover:bg-white/[0.06]
+                    border-[var(--border)]
+                    hover:bg-[var(--surface-soft)]
                     transition-all
                   "
-                >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`
-                        w-14
-                        h-14
+                  >
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`
+                        w-10
+                        h-10
                         rounded-2xl
                         flex
                         items-center
@@ -358,9 +330,10 @@ const Home = () => {
                               : "bg-cyan-500/20"
                         }
                       `}
-                    >
-                      <Activity
-                        className={`
+                      style={{marginLeft:"10px"}}
+                      >
+                        <Activity
+                          className={`
                           ${
                             txn.transactionType === "DEPOSIT"
                               ? "text-green-400"
@@ -369,23 +342,23 @@ const Home = () => {
                                 : "text-cyan-400"
                           }
                         `}
-                      />
+                        />
+                      </div>
+
+                      <div>
+                        <h2 className="text-[var(--body-text)] font-bold text-lg">
+                          {txn.transactionType}
+                        </h2>
+
+                        <p className="text-[var(--muted)] text-sm">
+                          {txn.description}
+                        </p>
+                      </div>
                     </div>
 
-                    <div>
-                      <h2 className="text-white font-bold text-lg">
-                        {txn.transactionType}
-                      </h2>
-
-                      <p className="text-slate-400 text-sm">
-                        {txn.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="text-left md:text-right">
-                    <h2
-                      className={`
+                    <div className="text-left md:text-right" style={{marginRight:"30px"}}>
+                      <h2
+                        className={`
                         text-2xl
                         font-black
                         ${
@@ -396,19 +369,20 @@ const Home = () => {
                               : "text-cyan-400"
                         }
                       `}
-                    >
-                      ₹ {txn.amount}
-                    </h2>
+                      >
+                        ₹ {txn.amount}
+                      </h2>
 
-                    <p className="text-slate-500 text-sm">
-                      {new Date(txn.transactionDate).toLocaleString()}
-                    </p>
+                      <p className="text-[var(--muted)] text-sm">
+                        {new Date(txn.transactionDate).toLocaleString()}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
-      </div>
+      </>
     </DashboardLayout>
   );
 };
@@ -424,19 +398,18 @@ const StatsCard = ({ title, value, icon, color }) => {
   return (
     <div
       className="
-        bg-white/5
+        surface-card
         border
-        border-white/10
-        rounded-[30px]
+        border-[var(--border)]
+        rounded-[20px]
         p-6
-        backdrop-blur-xl
       "
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between" style={{marginLeft: "10px", marginTop: "10px", marginRight: "10px"}}>
         <div
           className={`
-            w-14
-            h-14
+            w-10
+            h-10
             rounded-2xl
             flex
             items-center
@@ -447,12 +420,14 @@ const StatsCard = ({ title, value, icon, color }) => {
           {icon}
         </div>
 
-        <CreditCard className="text-slate-600" />
+        <CreditCard className="text-[var(--muted)]" />
       </div>
 
-      <p className="text-slate-400 text-sm mt-6">{title}</p>
+      <p className="text-[var(--muted)] text-sm mt-6" style={{marginLeft: "10px"}}>{title}</p>
 
-      <h2 className="text-white text-3xl font-black mt-2">{value}</h2>
+      <h2 className="text-[var(--body-text)] text-3xl font-black mt-2" style={{marginLeft: "10px"}}>
+        {value}
+      </h2>
     </div>
   );
 };

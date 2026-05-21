@@ -13,9 +13,9 @@ const TransactionCard = ({ transaction }) => {
       sx={{
         p: 3,
         borderRadius: "28px",
-        background: "rgba(255,255,255,0.05)",
+        background: "var(--surface-soft)",
         backdropFilter: "blur(20px)",
-        border: "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid var(--border)",
         height: "100%",
       }}
     >
@@ -64,7 +64,7 @@ const TransactionCard = ({ transaction }) => {
 
       <Typography
         sx={{
-          color: "#fff",
+          color: "var(--body-text)",
           fontWeight: 800,
           fontSize: "22px",
           mb: 1,
@@ -91,7 +91,7 @@ const TransactionCard = ({ transaction }) => {
 
       <Typography
         sx={{
-          color: "#94a3b8",
+          color: "var(--muted)",
           fontSize: "14px",
           mb: 1,
         }}
@@ -103,7 +103,7 @@ const TransactionCard = ({ transaction }) => {
 
       <Typography
         sx={{
-          color: "#cbd5e1",
+          color: "var(--muted)",
           fontSize: "15px",
           mb: 3,
         }}
@@ -115,7 +115,7 @@ const TransactionCard = ({ transaction }) => {
 
       <Typography
         sx={{
-          color: "#64748b",
+          color: "var(--muted)",
           fontSize: "13px",
         }}
       >

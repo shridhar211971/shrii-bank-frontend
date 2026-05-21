@@ -3,16 +3,13 @@ const AuditStatsCard = ({ title, value }) => {
   return (
     <div
       className="
-        bg-white/5
-        border
-        border-white/10
+        surface-card
         rounded-3xl
         p-8
-        backdrop-blur-xl
       "
     >
 
-      <p className="text-slate-400 mb-4">
+      <p className="text-[var(--muted)] mb-4">
         {title}
       </p>
 
