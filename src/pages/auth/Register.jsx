@@ -38,14 +38,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.phoneNumber.length !== 10) {
+      toast.error("Phone number must be 10 digits");
+      return;
+    }
 
     try {
       const result = await dispatch(registerUser(formData)).unwrap();
 
       toast.success(
-        result?.message ||
-          result?.data?.message ||
-          "Registration successful!"
+        result?.message || result?.data?.message || "Registration successful!",
       );
 
       navigate("/login");
@@ -225,8 +227,20 @@ const Register = () => {
                 name="phoneNumber"
                 placeholder="Enter phone number"
                 value={formData.phoneNumber}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "");
+
+                  if (value.length <= 10) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      phoneNumber: value,
+                    }));
+                  }
+                }}
                 sx={textFieldSx}
+                inputProps={{
+                  maxLength: 10,
+                }}
               />
             </Box>
 
@@ -282,7 +296,6 @@ const Register = () => {
               }}
             >
               Already have an account?
-
               <Link
                 to="/login"
                 style={{

@@ -19,7 +19,7 @@
       "body-text": "#f8fafc",
       surface: "#071028",
       "surface-soft": "rgba(7, 16, 40, 0.92)",
-      border: "rgba(248, 246, 246, 0.12)",
+      border: "rgba(148, 163, 184, 0.22)",
       accent: "#22d3ee",
       muted: "#94a3b8",
       shadow: "0 12px 30px rgba(0, 0, 0, 0.45)",

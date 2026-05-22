@@ -115,20 +115,27 @@ const Home = () => {
           {/* BALANCE CARD */}
 
           <div
-            className="
-            relative
-            overflow-hidden
-            rounded-[20px]
-            p-8
-            md:p-10
-            margin-top: 20px
-            bg-gradient-to-br
-            from-cyan-500
-            via-blue-600
-            to-indigo-700
-          "
-            style={{ marginBottom: "20px" }}
-          >
+  className="
+    relative
+    overflow-hidden
+    rounded-[30px]
+    p-8
+    md:p-10
+  "
+  style={{
+    marginBottom: "20px",
+    background: `
+      linear-gradient(
+        135deg,
+        var(--accent) 0%,
+        #5597bd 50%,
+        #5d55b4 100%
+      )
+    `,
+    boxShadow: "0 20px 50px rgba(34,211,238,0.25)",
+    border: "1px solid rgba(255,255,255,0.12)",
+  }}
+>
             <div className="absolute top-0 right-4 w-80 h-80 bg-white/10 rounded-full blur-3xl ml-4"/>
 
             <div className="relative z-10 "  style={{marginLeft: "10px", marginTop: "10px", marginBottom: "10px"}}>
