@@ -162,17 +162,17 @@ const Transfer = () => {
 
         {/* GRID */}
 
-        <Grid container spacing={6}>
+        <Grid container spacing={3} justifyContent="center" sx={{mt:6, ml:8}}>
           {/* TRANSFER */}
 
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} md={10} lg={5.5} >
             <Paper
               component="form"
               onSubmit={handleTransferSubmit}
               elevation={0}
               sx={{
                 borderRadius: "32px",
-                p: 4,
+                p: 8,
                 background: "var(--surface-soft)",
                 backdropFilter: "blur(24px)",
                 border: "1px solid var(--border)",
@@ -183,7 +183,7 @@ const Transfer = () => {
                 sx={{
                   color: "var(--body-text)",
                   fontWeight: 900,
-                  mb: 1,
+                  mb: 6,
                 }}
               >
                 Transfer Money
@@ -262,14 +262,14 @@ const Transfer = () => {
 
           {/* WITHDRAW */}
 
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} md={10} lg={5} sx={{ mx: "auto" }}>
             <Paper
               component="form"
               onSubmit={handleWithdrawSubmit}
               elevation={0}
               sx={{
                 borderRadius: "32px",
-                p: 4,
+                p: 8,
                 background: "var(--surface-soft)",
                 backdropFilter: "blur(24px)",
                 border: "1px solid var(--border)",
@@ -280,7 +280,7 @@ const Transfer = () => {
                 sx={{
                   color: "var(--body-text)",
                   fontWeight: 800,
-                  mb: 4,
+                  mb: 6,
                 }}
               >
                 Withdraw Money

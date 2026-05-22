@@ -64,19 +64,19 @@ const Transactions = () => {
 
   // TYPE COLOR
 
-  const getTypeColor = (type) => {
-    if (type === "DEPOSIT") {
-      return {
-        bg: "rgba(34,197,94,0.15)",
-        color: "#22c55e",
-      };
-    }
+  // const getTypeColor = (type) => {
+  //   if (type === "DEPOSIT") {
+  //     return {
+  //       bg: "rgba(34,197,94,0.15)",
+  //       color: "#22c55e",
+  //     };
+  //   }
 
-    return {
-      bg: "rgba(239,68,68,0.15)",
-      color: "#ef4444",
-    };
-  };
+  //   return {
+  //     bg: "rgba(239,68,68,0.15)",
+  //     color: "#ef4444",
+  //   };
+  // };
 
   // DOWNLOAD PDF
 
@@ -219,7 +219,7 @@ const Transactions = () => {
                 mb: 1,
               }}
             >
-              Transactions History
+              Transactions_History
             </Typography>
 
             <Typography
@@ -316,7 +316,7 @@ const Transactions = () => {
                 <TableBody>
                   {transactions && transactions.length > 0 ? (
                     transactions.map((item) => {
-                      const typeStyle = getTypeColor(item.transactionType);
+                      // const typeStyle = getTypeColor(item.transactionType);
 
                       return (
                         <TableRow
@@ -332,7 +332,7 @@ const Transactions = () => {
                           <TableCell sx={tableCellStyle}>#{item.id}</TableCell>
 
                           <TableCell sx={tableCellStyle}>
-                            <Chip
+                            {/* <Chip
                               label={item.transactionType}
                               sx={{
                                 background: typeStyle.bg,
@@ -343,7 +343,8 @@ const Transactions = () => {
 
                                 borderRadius: "10px",
                               }}
-                            />
+                            /> */}
+                            {item.transactionType}
                           </TableCell>
 
                           <TableCell

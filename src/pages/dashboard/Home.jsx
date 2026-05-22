@@ -115,16 +115,16 @@ const Home = () => {
           {/* BALANCE CARD */}
 
           <div
-  className="
+            className="
     relative
     overflow-hidden
     rounded-[30px]
     p-8
     md:p-10
   "
-  style={{
-    marginBottom: "20px",
-    background: `
+            style={{
+              marginBottom: "20px",
+              background: `
       linear-gradient(
         135deg,
         var(--accent) 0%,
@@ -132,18 +132,25 @@ const Home = () => {
         #5d55b4 100%
       )
     `,
-    boxShadow: "0 20px 50px rgba(34,211,238,0.25)",
-    border: "1px solid rgba(255,255,255,0.12)",
-  }}
->
-            <div className="absolute top-0 right-4 w-80 h-80 bg-white/10 rounded-full blur-3xl ml-4"/>
+              boxShadow: "0 20px 50px rgba(34,211,238,0.25)",
+              border: "1px solid rgba(255,255,255,0.12)",
+            }}
+          >
+            <div className="absolute top-0 right-4 w-80 h-80 bg-white/10 rounded-full blur-3xl ml-4" />
 
-            <div className="relative z-10 "  style={{marginLeft: "10px", marginTop: "10px", marginBottom: "10px"}}>
+            <div
+              className="relative z-10 "
+              style={{
+                marginLeft: "10px",
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+            >
               <p className="text-cyan-100 text-lg mb-4 ">
                 Total Available Balance
               </p>
 
-              <h1
+              <h3
                 className="
                 text-5xl
                 md:text-6xl
@@ -152,7 +159,7 @@ const Home = () => {
               "
               >
                 ₹ {totalBalance.toLocaleString()}
-              </h1>
+              </h3>
 
               <div
                 className="
@@ -215,7 +222,6 @@ const Home = () => {
               value={`₹ ${totalBalance.toLocaleString()}`}
               icon={<Wallet size={28} />}
               color="cyan"
-              
             />
 
             <StatsCard
@@ -268,7 +274,7 @@ const Home = () => {
             rounded-[35px]
             p-6
           "
-          style={{marginBottom:"20px"}}
+            style={{ marginBottom: "20px" }}
           >
             <div
               className="flex items-center justify-between mb-8 flex-wrap gap-4"
@@ -285,9 +291,8 @@ const Home = () => {
                 className="
                 px-4 py-2
                 rounded-xl
-                bg-[var(--accent)]/10
                 text-[var(--accent)]
-                text-sm
+                text-md
                 font-semibold
               "
                 style={{ marginRight: "20px" }}
@@ -337,7 +342,7 @@ const Home = () => {
                               : "bg-cyan-500/20"
                         }
                       `}
-                      style={{marginLeft:"10px"}}
+                        style={{ marginLeft: "10px" }}
                       >
                         <Activity
                           className={`
@@ -363,10 +368,13 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <div className="text-left md:text-right" style={{marginRight:"30px"}}>
+                    <div
+                      className="text-left md:text-right"
+                      style={{ marginRight: "30px" }}
+                    >
                       <h2
                         className={`
-                        text-2xl
+                        text-xl
                         font-black
                         ${
                           txn.transactionType === "DEPOSIT"
@@ -412,7 +420,10 @@ const StatsCard = ({ title, value, icon, color }) => {
         p-6
       "
     >
-      <div className="flex items-center justify-between" style={{marginLeft: "10px", marginTop: "10px", marginRight: "10px"}}>
+      <div
+        className="flex items-center justify-between"
+        style={{ marginLeft: "10px", marginTop: "10px", marginRight: "10px" }}
+      >
         <div
           className={`
             w-10
@@ -430,9 +441,17 @@ const StatsCard = ({ title, value, icon, color }) => {
         <CreditCard className="text-[var(--muted)]" />
       </div>
 
-      <p className="text-[var(--muted)] text-sm mt-6" style={{marginLeft: "10px"}}>{title}</p>
+      <p
+        className="text-[var(--muted)] text-sm mt-6"
+        style={{ marginLeft: "10px" }}
+      >
+        {title}
+      </p>
 
-      <h2 className="text-[var(--body-text)] text-3xl font-black mt-2" style={{marginLeft: "10px"}}>
+      <h2
+        className="text-[var(--body-text)] text-3xl font-black mt-2"
+        style={{ marginLeft: "10px" }}
+      >
         {value}
       </h2>
     </div>

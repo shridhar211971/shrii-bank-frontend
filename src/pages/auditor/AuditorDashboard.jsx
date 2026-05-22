@@ -75,8 +75,8 @@ const AuditorDashboard = () => {
         
 
         {/* HORIZONTAL TAB NAVIGATION */}
-        <div className="surface-card rounded-[24px] p-4 border border-[var(--border)]">
-          <div className="flex gap-6 overflow-x-auto pb-2 md:pb-0" style={{marginTop:"5px", marginBottom: "5px", marginLeft: "10px"}}  >
+        <div className="surface-card rounded-[24px] p-4 border border-[var(--border)] sticky top-0 z-50 bg-[var(--surface)]">
+          <div className="flex gap-6 overflow-x-auto pb-2 md:pb-0" style={{marginTop:"10px", marginBottom: "10px", marginLeft: "10px"}}  >
             {tabs.map((tab) => (
               <button
                 key={tab.id}
