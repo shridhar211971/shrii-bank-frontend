@@ -34,6 +34,35 @@ export const getAuditTotals = createAsyncThunk(
   }
 );
 
+// =========================
+// GET ALL USERS
+// =========================
+
+export const getAllUsers = createAsyncThunk(
+  "auditor/getAllUsers",
+  async (_, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axiosInstance.get(
+        ENDPOINTS.AUDITOR.ALL_USERS,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message ||
+          "Failed to fetch users"
+      );
+    }
+  }
+);
+
 // Find User By Email
 export const findUserByEmail = createAsyncThunk(
   "auditor/findUserByEmail",
@@ -145,6 +174,8 @@ export const getTransactionById = createAsyncThunk(
 const initialState = {
   totals: {},
 
+  users: [],
+
   user: null,
 
   account: null,
@@ -170,6 +201,10 @@ const auditorSlice = createSlice({
   reducers: {
     clearError: (state) => {
       state.error = null;
+    },
+
+    clearUsers: (state) => {
+      state.users = [];
     },
 
     clearUser: (state) => {
@@ -207,6 +242,27 @@ const auditorSlice = createSlice({
       })
 
       .addCase(getAuditTotals.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+     // =========================
+      // GET ALL USERS
+      // =========================
+
+      .addCase(getAllUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.loading = false;
+
+        state.users =
+          action.payload?.data?.content || [];
+      })
+
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -293,6 +349,7 @@ const auditorSlice = createSlice({
 
 export const {
   clearError,
+  clearUsers,
   clearUser,
   clearAccount,
   clearTransactions,

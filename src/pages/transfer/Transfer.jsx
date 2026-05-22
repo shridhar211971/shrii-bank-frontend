@@ -22,37 +22,29 @@ import {
 import toast from "react-hot-toast";
 
 const Transfer = () => {
-
   const dispatch = useDispatch();
-  const myAccountNumber =
-  sessionStorage.getItem(
-    "accountNumber"
-  );
+  const myAccountNumber = sessionStorage.getItem("accountNumber");
   // TRANSFER STATE
 
-  const [transferData, setTransferData] =
-    useState({
-      accountNumber:  myAccountNumber || "",
-      destinationAccountNumber: "",
-      amount: "",
-      description: "",
-    });
+  const [transferData, setTransferData] = useState({
+    accountNumber: myAccountNumber || "",
+    destinationAccountNumber: "",
+    amount: "",
+    description: "",
+  });
 
   // WITHDRAW STATE
 
-  const [withdrawData, setWithdrawData] =
-    useState({
-      accountNumber: myAccountNumber || "",
-      amount: "",
-      description: "",
-    });
+  const [withdrawData, setWithdrawData] = useState({
+    accountNumber: myAccountNumber || "",
+    amount: "",
+    description: "",
+  });
 
   // COMMON STYLE
 
   const textFieldSx = {
-
     "& .MuiOutlinedInput-root": {
-
       height: 56,
       borderRadius: "18px",
       color: "var(--body-text)",
@@ -84,41 +76,30 @@ const Transfer = () => {
   // TRANSFER CHANGE
 
   const handleTransferChange = (e) => {
-
     setTransferData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
-
   };
 
   // WITHDRAW CHANGE
 
   const handleWithdrawChange = (e) => {
-
     setWithdrawData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
-
   };
 
   // TRANSFER SUBMIT
 
   const handleTransferSubmit = async (e) => {
-
     e.preventDefault();
 
     try {
+      const result = await dispatch(transferMoney(transferData)).unwrap();
 
-      const result = await dispatch(
-        transferMoney(transferData)
-      ).unwrap();
-
-      toast.success(
-        result?.message ||
-        "Transfer successful!"
-      );
+      toast.success(result?.message || "Transfer successful!");
 
       setTransferData({
         accountNumber: "",
@@ -126,53 +107,37 @@ const Transfer = () => {
         amount: "",
         description: "",
       });
-
     } catch (error) {
-
       toast.error(error || "Transfer failed");
-
     }
   };
 
   // WITHDRAW SUBMIT
 
   const handleWithdrawSubmit = async (e) => {
-
     e.preventDefault();
 
     try {
+      const result = await dispatch(withdrawMoney(withdrawData)).unwrap();
 
-      const result = await dispatch(
-        withdrawMoney(withdrawData)
-      ).unwrap();
-
-      toast.success(
-        result?.message ||
-        "Withdraw successful!"
-      );
+      toast.success(result?.message || "Withdraw successful!");
 
       setWithdrawData({
         accountNumber: "",
         amount: "",
         description: "",
       });
-
     } catch (error) {
-
       toast.error(error || "Withdraw failed");
-
     }
   };
 
   return (
     <DashboardLayout>
-
       <Box>
-
         {/* TITLE */}
 
         <Box mb={5}>
-
           <Typography
             variant="h4"
             sx={{
@@ -193,17 +158,14 @@ const Transfer = () => {
           >
             Send or withdraw money securely
           </Typography>
-
         </Box>
 
         {/* GRID */}
 
         <Grid container spacing={6}>
-
           {/* TRANSFER */}
 
           <Grid item xs={12} lg={6}>
-
             <Paper
               component="form"
               onSubmit={handleTransferSubmit}
@@ -216,7 +178,6 @@ const Transfer = () => {
                 border: "1px solid var(--border)",
               }}
             >
-
               <Typography
                 variant="h4"
                 sx={{
@@ -229,7 +190,6 @@ const Transfer = () => {
               </Typography>
 
               <Stack spacing={2}>
-
                 {/* <TextField
                   fullWidth
                   name="accountNumber"
@@ -243,11 +203,15 @@ const Transfer = () => {
                   fullWidth
                   name="destinationAccountNumber"
                   placeholder="Receiver account number"
-                  value={
-                    transferData.destinationAccountNumber
-                  }
+                  value={transferData.destinationAccountNumber}
                   onChange={handleTransferChange}
                   sx={textFieldSx}
+                  type="number"
+                  onKeyDown={(e) => {
+                    if (["e", "E", "+", "-"].includes(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
 
                 <TextField
@@ -257,6 +221,12 @@ const Transfer = () => {
                   value={transferData.amount}
                   onChange={handleTransferChange}
                   sx={textFieldSx}
+                  type="number"
+                  onKeyDown={(e) => {
+                    if (["e", "E", "+", "-"].includes(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
 
                 <TextField
@@ -286,17 +256,13 @@ const Transfer = () => {
                 >
                   Send Transfer
                 </Button>
-
               </Stack>
-
             </Paper>
-
           </Grid>
 
           {/* WITHDRAW */}
 
           <Grid item xs={12} lg={6}>
-
             <Paper
               component="form"
               onSubmit={handleWithdrawSubmit}
@@ -309,7 +275,6 @@ const Transfer = () => {
                 border: "1px solid var(--border)",
               }}
             >
-
               <Typography
                 variant="h4"
                 sx={{
@@ -322,7 +287,6 @@ const Transfer = () => {
               </Typography>
 
               <Stack spacing={2}>
-
                 {/* <TextField
                   fullWidth
                   name="accountNumber"
@@ -339,6 +303,12 @@ const Transfer = () => {
                   value={withdrawData.amount}
                   onChange={handleWithdrawChange}
                   sx={textFieldSx}
+                  type="number"
+                  onKeyDown={(e) => {
+                    if (["e", "E", "+", "-"].includes(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
 
                 <TextField
@@ -368,17 +338,11 @@ const Transfer = () => {
                 >
                   Withdraw Money
                 </Button>
-
               </Stack>
-
             </Paper>
-
           </Grid>
-
         </Grid>
-
       </Box>
-
     </DashboardLayout>
   );
 };

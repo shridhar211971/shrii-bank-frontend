@@ -10,6 +10,7 @@ const ENDPOINTS = {
     PROFILE: "/users/me",
     UPDATE_PASSWORD: "/users/update-password",
     UPLOAD_PROFILE: "/users/profile-picture",
+    
   },
 
   ACCOUNTS: {
@@ -26,6 +27,7 @@ const ENDPOINTS = {
     TOTALS: "/audit/totals",
     FIND_USER: "/audit/users",
     FIND_ACCOUNT: "/audit/accounts",
+    ALL_USERS: "/users",
   },
 };
 

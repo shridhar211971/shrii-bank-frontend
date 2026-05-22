@@ -1,18 +1,27 @@
 import { useSelector } from "react-redux";
-import { getToken } from "../utils/token";
+import { getToken, getRoles } from "../utils/token";
 
 const useAuth = () => {
 
-  const { user, token } = useSelector(
-    (state) => state.auth
-  );
+  const { user, token, roles } = useSelector((state) => state.auth);
 
-  // Check both Redux state and localStorage for token
   const localStorageToken = getToken();
+  const localStorageRoles = getRoles();
+
+  const normalizedRoles = Array.isArray(roles)
+    ? roles
+    : roles
+    ? [roles]
+    : Array.isArray(localStorageRoles)
+    ? localStorageRoles
+    : localStorageRoles
+    ? [localStorageRoles]
+    : [];
 
   return {
     user,
     token,
+    roles: normalizedRoles,
     isAuthenticated: !!token || !!localStorageToken,
   };
 };

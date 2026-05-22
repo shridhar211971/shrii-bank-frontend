@@ -122,7 +122,7 @@ const Profile = () => {
 
       {/* ================= TOP SECTION ================= */}
 
-      <Grid container spacing={3}  alignItems="stretch">
+      <Grid container spacing={1}  alignItems="stretch">
         {/* PROFILE CARD */}
 
         <Grid item xs={12} md={4} display="flex">
@@ -136,8 +136,8 @@ const Profile = () => {
               },
               borderRadius: "32px",
               height: "100%",
-              minHeight: 420,
-              width: "100%",
+              minHeight: 300,
+              width: "85%",
               background: "var(--surface-soft)",
               backdropFilter: "blur(24px)",
               border: "1px solid var(--border)",
