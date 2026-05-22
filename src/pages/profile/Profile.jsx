@@ -114,6 +114,7 @@ const Profile = () => {
           sx={{
             color: "var(--muted)",
             fontSize: "16px",
+            mb:1,
           }}
         >
           Manage your banking account information
@@ -122,7 +123,7 @@ const Profile = () => {
 
       {/* ================= TOP SECTION ================= */}
 
-      <Grid container spacing={1}  alignItems="stretch">
+      <Grid container spacing={0}  alignItems="stretch">
         {/* PROFILE CARD */}
 
         <Grid item xs={12} md={4} display="flex">
@@ -404,7 +405,7 @@ const Profile = () => {
 
       {/* ================= PERSONAL DETAILS ================= */}
 
-      <Grid container spacing={4} sx={{ mt: 1 }}>
+      <Grid container spacing={4} sx={{ mt: 4 }}>
         <Grid item xs={12}>
           <Paper
             elevation={0}
@@ -498,6 +499,30 @@ const Profile = () => {
 
                       <Typography sx={valueStyle}>
                         {profile?.lastName}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={6} lg={4}>
+                <Paper elevation={0} sx={infoCard}>
+                  <Stack
+                    direction="row"
+                    spacing={2}
+                    alignItems="center"
+                  >
+                    <Box sx={iconBox}>
+                      <PersonIcon />
+                    </Box>
+
+                    <Box>
+                      <Typography sx={labelStyle}>
+                        Role
+                      </Typography>
+
+                      <Typography sx={valueStyle}>
+                        {profile?.roles?.map((role) => role.name).join(", ")}
                       </Typography>
                     </Box>
                   </Stack>

@@ -123,16 +123,26 @@ const UsersTab = () => {
       sortable: false,
 
       renderCell: (params) => (
-        <Avatar
-          src={params.value ? `${BASE_URL}${params.value}` : ""}
-          sx={{
-            width: 50,
-            height: 50,
-
-            border: "2px solid var(--accent)",
-          }}
-        />
-      ),
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      height: "100%",
+      py: 1.5, // top & bottom margin
+    }}
+  >
+    <Avatar
+      src={params.value ? `${BASE_URL}${params.value}` : ""}
+      sx={{
+        width: 50,
+        height: 50,
+        border: "2px solid var(--accent)",
+      }}
+    />
+  </Box>
+),
     },
 
     {
@@ -279,6 +289,7 @@ const UsersTab = () => {
           sx={{
             color: "var(--muted)",
             fontSize: "16px",
+            mb:1,
           }}
         >
           Review your recent banking activities
@@ -713,6 +724,7 @@ const UsersTab = () => {
           <DataGrid
             rows={rows}
             columns={columns}
+             rowHeight={60}
             pageSizeOptions={[5, 10, 25, 50]}
             disableRowSelectionOnClick
             slots={{

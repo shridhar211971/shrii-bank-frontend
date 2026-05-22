@@ -122,149 +122,159 @@ const TransactionsTab = () => {
     return [];
   }, [transactions]);
 
-  // =========================
-  // TABLE COLUMNS
-  // =========================
+ // =========================
+// TABLE COLUMNS
+// =========================
 
-  const columns = [
-    {
-      field: "id",
+const columns = [
+  {
+    field: "id",
 
-      headerName: "ID",
+    headerName: "ID",
 
-      width: 90,
-    },
+    width: 90,
+  },
 
-    {
-      field: "transactionType",
+  {
+    field: "transactionType",
 
-      headerName: "Type",
+    headerName: "Type",
 
-      flex: 1,
+    flex: 1,
 
-      minWidth: 140,
+    minWidth: 140,
 
-      renderCell: (params) => {
-        const value = params.value;
+    renderCell: (params) => (
+      <Typography
+        sx={{
+          fontWeight: 400,
+          color: "var(--body-text)",
+          fontSize: "14px",
+        }}
+      >
+        {params.value}
+      </Typography>
+    ),
+  },
 
-        return (
-          <Chip
-            label={value}
-            sx={{
-              fontWeight: 700,
+  {
+    field: "amount",
 
-              background:
-                value === "DEPOSIT"
-                  ? "rgba(34,197,94,0.15)"
-                  : value === "WITHDRAWAL"
-                    ? "rgba(239,68,68,0.15)"
-                    : "rgba(59,130,246,0.15)",
+    headerName: "Amount",
 
-              border: `1px solid ${
-                value === "DEPOSIT"
-                  ? "#22c55e"
-                  : value === "WITHDRAWAL"
-                    ? "#ef4444"
-                    : "#3b82f6"
-              }`,
+    flex: 1,
 
-              color:
-                value === "DEPOSIT"
-                  ? "#22c55e"
-                  : value === "WITHDRAWAL"
-                    ? "#ef4444"
-                    : "#3b82f6",
-            }}
-          />
-        );
-      },
-    },
+    minWidth: 130,
 
-    {
-      field: "amount",
+    renderCell: (params) => {
+      const row = params.row;
 
-      headerName: "Amount",
+      const color =
+        row.transactionType === "DEPOSIT"
+          ? "#22c55e"
+          : row.transactionType === "WITHDRAWAL"
+            ? "#ef4444"
+            : "#3b82f6";
 
-      flex: 1,
-
-      minWidth: 130,
-
-      renderCell: (params) => (
-        <Typography fontWeight={700}>
+      return (
+        <Typography
+          sx={{
+            fontWeight: 800,
+            color,
+            fontSize: "15px",
+          }}
+        >
           ₹{params.value?.toLocaleString()}
         </Typography>
-      ),
+      );
     },
+  },
 
-    {
-      field: "description",
+  {
+    field: "description",
 
-      headerName: "Description",
+    headerName: "Description",
 
-      flex: 1.5,
+    flex: 1.5,
 
-      minWidth: 240,
-    },
+    minWidth: 240,
 
-    {
-      field: "sourceAccount",
+    renderCell: (params) => (
+      <Typography
+        title={params.value}
+        sx={{
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          width: "100%",
+          color: "var(--body-text)",
+          cursor: "pointer",
+        }}
+      >
+        {params.value}
+      </Typography>
+    ),
+  },
 
-      headerName: "Source",
+  {
+    field: "sourceAccount",
 
-      flex: 1,
+    headerName: "Source",
 
-      minWidth: 180,
-    },
+    flex: 1,
 
-    {
-      field: "destinationAccount",
+    minWidth: 180,
+  },
 
-      headerName: "Destination",
+  {
+    field: "destinationAccount",
 
-      flex: 1,
+    headerName: "Destination",
 
-      minWidth: 180,
-    },
+    flex: 1,
 
-    {
-      field: "transactionDate",
+    minWidth: 180,
+  },
 
-      headerName: "Date",
+  {
+    field: "transactionDate",
 
-      flex: 1.3,
+    headerName: "Date",
 
-      minWidth: 200,
+    flex: 1.3,
 
-      renderCell: (params) => (
-        <Typography>{new Date(params.value).toLocaleString()}</Typography>
-      ),
-    },
+    minWidth: 200,
 
-    {
-      field: "status",
+    renderCell: (params) => (
+      <Typography>{new Date(params.value).toLocaleString()}</Typography>
+    ),
+  },
 
-      headerName: "Status",
+  {
+    field: "status",
 
-      flex: 1,
+    headerName: "Status",
 
-      minWidth: 120,
+    flex: 1,
 
-      renderCell: (params) => (
-        <Chip
-          label={params.value}
-          sx={{
-            background: "rgba(34,197,94,0.15)",
+    minWidth: 120,
 
-            border: "1px solid #22c55e",
+    renderCell: (params) => (
+      <Chip
+        label={params.value}
+        sx={{
+          background: "rgba(34,197,94,0.15)",
 
-            color: "#22c55e",
+          border: "1px solid #22c55e",
 
-            fontWeight: 700,
-          }}
-        />
-      ),
-    },
-  ];
+          color: "#22c55e",
+
+          fontWeight: 700,
+        }}
+      />
+    ),
+  },
+];
 
   // =========================
   // DOWNLOAD PDF
@@ -358,6 +368,7 @@ const TransactionsTab = () => {
           sx={{
             color: "var(--muted)",
             fontSize: "16px",
+            mb:1,
           }}
         >
           Review your recent banking transactions and search by account or

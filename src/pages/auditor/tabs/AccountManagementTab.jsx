@@ -246,6 +246,7 @@ const AccountManagementTab = () => {
                           sx={{
                             color: "var(--muted)",
                             fontSize: "16px",
+                            mb:1,
                           }}
                         >
                           Manage your bank accounts and transactions

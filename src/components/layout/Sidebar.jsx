@@ -62,8 +62,7 @@ const Sidebar = ({ isOpen }) => {
         top-0
         h-screen
         bg-[var(--surface)]
-        border-r
-        border-[var(--border)]
+        
         transition-all
         duration-300
         overflow-hidden
@@ -114,9 +113,7 @@ const Sidebar = ({ isOpen }) => {
               items-center
               justify-center
               bg-[var(--surface-soft)]
-              border
-              border-[var(--border)]
-              shadow-lg
+              b
             "
           >
             <img
@@ -126,7 +123,7 @@ const Sidebar = ({ isOpen }) => {
             />
           </div>
 
-          {isOpen && (
+          {/* {isOpen && (
             <>
               <h1
                 className="
@@ -151,13 +148,13 @@ const Sidebar = ({ isOpen }) => {
                 Modern Banking Platform
               </p>
             </>
-          )}
+          )} */}
         </div>
       </div>
 
       {/* NAVIGATION */}
 
-      <nav className="flex-1 px-4 py-8 space-y-3 overflow-y-auto">
+      <nav className="flex-1 px-4 py-8 space-y-3 overflow-y-auto" style={{marginTop:"10px"}}>
         {navItems.map((item) => (
           <NavLink
             key={item.title}
@@ -170,7 +167,7 @@ const Sidebar = ({ isOpen }) => {
               gap-4
               px-4
               py-4
-              rounded-2xl
+              rounded-4xl
               transition-all
               duration-300
               overflow-hidden
@@ -227,17 +224,18 @@ const Sidebar = ({ isOpen }) => {
                 items-center
                 justify-center
                 min-w-[45px]
-                h-[45px]
+                h-[50px]
                 rounded-xl
                 transition-all
                 duration-300
 
                 ${
                   window.location.pathname === item.path
-                    ? "bg-white/20"
+                    ? "bg-white/10"
                     : "bg-[var(--surface-soft)]"
                 }
               `}
+              style={{marginLeft:"15px", marginTop:"5px"}}
             >
               {item.icon}
             </div>
@@ -288,7 +286,7 @@ const Sidebar = ({ isOpen }) => {
         >
           <div
             className="
-              rounded-2xl
+              rounded-1xl
               p-4
               bg-[var(--surface-soft)]
               border

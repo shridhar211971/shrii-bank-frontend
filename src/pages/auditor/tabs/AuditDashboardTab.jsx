@@ -10,7 +10,7 @@ const AuditDashboardTab = ({ totals, loading }) => {
     { name: "Transactions", value: totals.totalTransactions || 0 },
   ];
 
-  const COLORS = ["#22d3ee", "#06b6d4", "#0ea5e9"];
+  const COLORS = ["#22c55e", "#ef4444", "#06b6d4"];
 
   if (loading) {
     return (
@@ -38,6 +38,7 @@ const AuditDashboardTab = ({ totals, loading }) => {
                   sx={{
                     color: "var(--muted)",
                     fontSize: "16px",
+                    mb:1,
                   }}
                 >
                   Review your recent banking activities
@@ -55,13 +56,13 @@ const AuditDashboardTab = ({ totals, loading }) => {
           title="Total Accounts"
           value={totals.totalAccounts || 0}
           icon="🏦"
-          color="blue"
+          color="cyan"
         />
         <AuditStatsCard
           title="Total Transactions"
           value={totals.totalTransactions || 0}
           icon="💳"
-          color="purple"
+          color="cyan"
         />
       </div>
 
@@ -84,7 +85,18 @@ const AuditDashboardTab = ({ totals, loading }) => {
                   borderRadius: "12px",
                 }}
               />
-              <Bar dataKey="value" fill="var(--accent)" radius={[8, 8, 0, 0]} />
+              <Bar
+              dataKey="value"
+              radius={[8, 8, 0, 0]}
+              barSize={45}
+            >
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`bar-cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -119,7 +131,7 @@ const AuditDashboardTab = ({ totals, loading }) => {
               <div key={index} className="text-center" style={{marginBottom:"10px"}}>
                 <div
                   className="w-6 h-3 rounded-full mx-auto mb-2"
-                  style={{ background: COLORS[index], marginLeft: "90px" }}
+                  style={{ background: COLORS[index], marginLeft: "70px" }}
                 />
                 <p className="text-[var(--muted)] text-sm">{item.name}</p>
                 <p className="text-[var(--body-text)] font-bold">{item.value}</p>
