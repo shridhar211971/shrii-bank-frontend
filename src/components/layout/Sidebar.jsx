@@ -7,10 +7,18 @@ import {
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 import Shriilogo from "../../assets/shriilogo.png";
 
 const Sidebar = ({ isOpen }) => {
+  const { roles } = useAuth();
+
+  const normalizedRoles = Array.isArray(roles) ? roles : roles ? [roles] : [];
+  const canAccessAuditor = normalizedRoles.some(
+    (role) => role === "ADMIN" || role === "AUDITOR"
+  );
+
   const navItems = [
     {
       title: "Dashboard",
@@ -36,11 +44,15 @@ const Sidebar = ({ isOpen }) => {
       icon: <User size={24} />,
     },
 
-    {
-      title: "Auditor",
-      path: "/auditor",
-      icon: <ShieldCheck size={24} />,
-    },
+    ...(canAccessAuditor
+      ? [
+          {
+            title: "Auditor",
+            path: "/auditor",
+            icon: <ShieldCheck size={24} />,
+          },
+        ]
+      : []),
   ];
 
   return (

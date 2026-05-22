@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Sidebar from "../components/layout/Sidebar";
 import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 const DashboardLayout = ({ children }) => {
 
@@ -36,30 +37,29 @@ const DashboardLayout = ({ children }) => {
           duration-300
           overflow-hidden
         "
-        // style={{marginRight: "10px", marginLeft: "1px"}}
       >
         {/* HEADER */}
 
-        <Header isOpen={isOpen} setIsOpen={setIsOpen}  />
+        <Header isOpen={isOpen} setIsOpen={setIsOpen} />
 
         {/* PAGE CONTENT */}
 
         <main
           className="
             flex-1
+            min-h-0
             p-4
             md:p-6
             lg:p-10
             pt-[100px]
-            pb-6
             overflow-auto
           "
-          style={{ WebkitOverflowScrolling: 'touch'}}
+          style={{ WebkitOverflowScrolling: "touch" }}
         >
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
         </main>
+
+        <Footer />
       </div>
     </div>
   );

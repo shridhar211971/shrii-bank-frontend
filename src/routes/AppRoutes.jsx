@@ -103,7 +103,7 @@ const AppRoutes = () => {
       <Route
         path="/auditor"
         element={
-          <PrivateRoute>
+          <PrivateRoute allowedRoles={["ADMIN", "AUDITOR"]}>
             <AuditorDashboard />
           </PrivateRoute>
         }
