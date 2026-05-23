@@ -359,7 +359,7 @@ const Transactions = () => {
                                   : "#ef4444",
                             }}
                           >
-                            ${item.amount}
+                            ₹ {item.amount}
                           </TableCell>
 
                           <TableCell sx={tableCellStyle}>

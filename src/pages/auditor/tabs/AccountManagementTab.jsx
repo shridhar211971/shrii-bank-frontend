@@ -202,7 +202,7 @@ const AccountManagementTab = () => {
     setLoading(true);
     try {
       const result = await dispatch(
-        resetPassword({ code: resetData.code, password: resetData.newPassword })
+        resetPassword({ code: resetData.code, newPassword: resetData.newPassword })
       ).unwrap();
       toast.success(result?.message || "Password reset successfully");
       setResetMode("request");

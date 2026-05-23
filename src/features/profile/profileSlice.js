@@ -29,7 +29,7 @@ export const updatePassword = createAsyncThunk(
 
   async (data, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(
+      const response = await axiosInstance.put(
         ENDPOINTS.USERS.UPDATE_PASSWORD,
         data,
       );
