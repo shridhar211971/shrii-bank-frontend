@@ -20,7 +20,7 @@ const ResetPassword = () => {
 
   const [formData, setFormData] = useState({
     code: "",
-    password: "",
+    newPassword: "",
   });
 
   const handleChange = (e) => {
@@ -141,7 +141,7 @@ const ResetPassword = () => {
               name="password"
               label="New Password"
               placeholder="Enter new password"
-              value={formData.password}
+              value={formData.newPassword}
               onChange={handleChange}
               sx={textFieldSx}
             />
