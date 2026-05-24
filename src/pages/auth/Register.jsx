@@ -104,22 +104,24 @@ const Register = () => {
             width: "100%",
             maxWidth: "760px",
             borderRadius: "32px",
-            p: { xs: 3, sm: 4, md: 5 },
+            p: { xs: 2, sm: 3, md: 4 },
             background: "var(--surface-soft)",
             backdropFilter: "blur(24px)",
             border: "1px solid var(--border)",
           }}
+          style={{marginBottom:"20px"}}
+
         >
           <Typography
-            variant="h2"
+            variant="h4"
             sx={{
-              fontWeight: 900,
+              fontWeight: 700,
               color: "var(--body-text)",
               mb: 1,
               fontSize: {
-                xs: "2.5rem",
-                sm: "3.5rem",
-                md: "4.5rem",
+                xs: "2rem",
+                sm: "2.5rem",
+                md: "3rem",
               },
               lineHeight: 1,
             }}
@@ -130,7 +132,7 @@ const Register = () => {
           <Typography
             sx={{
               color: "var(--muted)",
-              mb: 4,
+              mb: 1,
               fontSize: {
                 xs: "14px",
                 sm: "16px",
@@ -145,7 +147,7 @@ const Register = () => {
               <Grid item xs={12} md={6}>
                 <Typography
                   sx={{
-                    mb: 1,
+                    // mb: 1,
                     color: "var(--body-text)",
                     fontSize: "18px",
                     fontWeight: 500,
@@ -167,7 +169,7 @@ const Register = () => {
               <Grid item xs={12} md={6}>
                 <Typography
                   sx={{
-                    mb: 1,
+                    // mb: 1,
                     color: "var(--body-text)",
                     fontSize: "18px",
                     fontWeight: 500,
@@ -190,7 +192,7 @@ const Register = () => {
             <Box>
               <Typography
                 sx={{
-                  mb: 1,
+                  // mb: 1,
                   color: "var(--body-text)",
                   fontSize: "18px",
                   fontWeight: 500,
@@ -213,7 +215,7 @@ const Register = () => {
             <Box>
               <Typography
                 sx={{
-                  mb: 1,
+                  // mb: 1,
                   color: "var(--body-text)",
                   fontSize: "18px",
                   fontWeight: 500,
@@ -247,7 +249,7 @@ const Register = () => {
             <Box>
               <Typography
                 sx={{
-                  mb: 1,
+                  // mb: 1,
                   color: "var(--body-text)",
                   fontSize: "18px",
                   fontWeight: 500,
