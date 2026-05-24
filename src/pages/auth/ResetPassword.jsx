@@ -93,17 +93,18 @@ const ResetPassword = () => {
             backdropFilter: "blur(24px)",
             border: "1px solid var(--border)",
           }}
+          style={{marginBottom:"20px"}}
         >
           <Typography
-            variant="h2"
+            variant="h4"
             sx={{
-              fontWeight: 900,
+              fontWeight: 700,
               color: "var(--body-text)",
               mb: 1,
               fontSize: {
-                xs: "2.5rem",
-                sm: "3.5rem",
-                md: "4rem",
+                xs: "2rem",
+                sm: "2.5rem",
+                md: "3rem",
               },
               lineHeight: 1,
             }}

@@ -90,25 +90,27 @@ const ForgotPassword = () => {
             width: "100%",
             maxWidth: "620px",
             borderRadius: "32px",
-            p: { xs: 3, sm: 5, md: 6 },
+            p: { xs: 2, sm: 3, md: 4 },
             background: "var(--surface-soft)",
             backdropFilter: "blur(24px)",
             border: "1px solid var(--border)",
           }}
+          style={{marginBottom:"20px"}}
         >
           <Typography
-            variant="h2"
+            variant="h4"
             sx={{
-              fontWeight: 900,
+              fontWeight: 700,
               color: "var(--body-text)",
               mb: 1,
               fontSize: {
-                xs: "2.5rem",
-                sm: "4rem",
-                md: "4.5rem",
+                xs: "2rem",
+                sm: "2.5rem",
+                md: "3rem",
               },
               lineHeight: 1,
             }}
+            
           >
             Forgot Password
           </Typography>

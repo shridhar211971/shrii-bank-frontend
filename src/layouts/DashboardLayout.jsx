@@ -60,59 +60,76 @@ const DashboardLayout = ({ children }) => {
           ${isAppView ? "overflow-hidden" : "overflow-visible"}
         `}
       >
-        <div className="sticky top-0 z-30">
-          {!isAppView && (
-            <div className="border-b border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur-xl">
-              <div className="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-10">
-                <div className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="text-xl font-semibold uppercase tracking-[0.24em] text-[var(--accent)] " style={{marginTop:"15px", marginBottom:"10px", marginLeft:"15px"}}>
-                      Shrii Bank 🏦
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3 py-2 md:py-0">
-                    {[
-                      { title: "Dashboard", path: "/dashboard" },
-                      { title: "Transfer", path: "/transfer" },
-                      { title: "Transactions", path: "/transactions" },
-                      { title: "Profile", path: "/profile" },
-                      ...(canAccessAuditor ? [{ title: "Auditor", path: "/auditor" }] : []),
-                    ].map((item) => (
-                      <NavLink
-                      style={{marginBottom:"1px",marginTop:"10px", marginLeft:"5px"}}
-                        key={item.title}
-                        to={item.path}
-                        className={({ isActive }) => `
-                          px-10
-                          py-4
-                          rounded-md
-                          text-sm
-                          font-semibold
-                          transition-all
-                          ${
-                            isActive
-                              ? "bg-[var(--accent)] text-black"
-                              : "bg-[var(--surface-soft)] text-[var(--body-text)] hover:bg-[var(--surface)]"
-                          }
-                          
-                        `}
-                        
-                      >
-                         {item.title}
-                      </NavLink >
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+         <div className="sticky top-0 z-30 bg-[var(--surface)]">
 
+          {/* HEADER */}
           <Header
             isOpen={isOpen}
             toggleSidebar={toggleSidebar}
             isAppView={isAppView}
             toggleAppView={toggleAppView}
           />
+
+          {/* NAVBAR */}
+          {!isAppView && (
+            <div className="border-b border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur-xl">
+              <div className="max-w-[1600px] mx-auto px-3 sm:px-4 md:px-6 lg:px-10">
+
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 py-3">
+
+                  {/* LOGO */}
+                  <div className="flex items-center justify-center lg:justify-start">
+                    <div className="text-lg sm:text-xl font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">
+                      SHRII BANK 🏦
+                    </div>
+                  </div>
+
+                  {/* NAV LINKS */}
+                  <div className="overflow-x-auto scrollbar-hide">
+                    <div className="flex min-w-max items-center justify-center gap-3 pb-2 lg:pb-0">
+
+                      {[
+                        { title: "Dashboard", path: "/dashboard" },
+                        { title: "Transfer", path: "/transfer" },
+                        { title: "Transactions", path: "/transactions" },
+                        { title: "Profile", path: "/profile" },
+                        ...(canAccessAuditor
+                          ? [{ title: "Auditor", path: "/auditor" }]
+                          : []),
+                      ].map((item) => (
+                        <NavLink
+                          key={item.title}
+                          to={item.path}
+                          className={({ isActive }) => `
+                            whitespace-nowrap
+                            rounded-md
+                            text-xs
+                            sm:text-sm
+                            font-semibold
+                            transition-all
+                            px-3
+                            py-2
+                            sm:px-4
+                            md:px-5
+                            ${
+                              isActive
+                                ? "bg-[var(--accent)] text-black"
+                                : "bg-[var(--surface-soft)] text-[var(--body-text)] hover:bg-[var(--surface)]"
+                            }
+                          `}
+                          style={{marginTop:"5px",marginBottom:"5px"}}
+                        >
+                          {item.title}
+                        </NavLink>
+                      ))}
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <main
