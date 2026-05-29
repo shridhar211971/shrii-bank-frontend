@@ -37,7 +37,9 @@ import {
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-const BASE_URL = "http://localhost:8080/";
+// const BASE_URL = "http://localhost:8080/";
+
+// const BASE_URL = "/";
 
 const UsersTab = () => {
   const dispatch = useDispatch();
@@ -134,7 +136,9 @@ const UsersTab = () => {
     }}
   >
     <Avatar
-      src={params.value ? `${BASE_URL}${params.value}` : ""}
+      // src={params.value ? `${BASE_URL}${params.value}` : ""}
+      // src={params.value ? `/${params.value}` : ""}
+      src={params.value || ""}
       sx={{
         width: 50,
         height: 50,
@@ -470,11 +474,12 @@ const UsersTab = () => {
             <Grid container spacing={3} alignItems="center">
               <Grid item>
                 <Avatar
-                  src={
-                    user.profilePictureUrl
-                      ? `${BASE_URL}${user.profilePictureUrl}`
-                      : ""
-                  }
+                  // src={
+                  //   user.profilePictureUrl
+                  //     ? `${BASE_URL}${user.profilePictureUrl}`
+                  //     : ""
+                  // }
+                  src={user.profilePictureUrl || ""}
                   sx={{
                     width: 110,
                     height: 110,
@@ -559,11 +564,12 @@ const UsersTab = () => {
               <Grid item xs={12} md={6}>
                 <Stack direction="row" spacing={3} alignItems="center">
                   <Avatar
-                    src={
-                      accountUser?.profilePictureUrl
-                        ? `${BASE_URL}${accountUser.profilePictureUrl}`
-                        : ""
-                    }
+                    // src={
+                    //   accountUser?.profilePictureUrl
+                    //     ? `${BASE_URL}${accountUser.profilePictureUrl}`
+                    //     : ""
+                    // }
+                    src={accountUser?.profilePictureUrl || ""}
                     sx={{
                       width: 110,
                       height: 110,

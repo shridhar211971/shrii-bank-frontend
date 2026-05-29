@@ -146,11 +146,17 @@ const Profile = () => {
           >
             <Stack  spacing={3}>
               <Avatar
-                src={
-                  profile?.profilePictureUrl
-                    ? `http://localhost:8080/${profile.profilePictureUrl}`
-                    : ""
-                }
+                // src={
+                //   profile?.profilePictureUrl
+                //     ? `http://localhost:8080/${profile.profilePictureUrl}`
+                //     : ""
+                // }
+                // src={
+                //   profile?.profilePictureUrl
+                //     ? `/${profile.profilePictureUrl}`
+                //     : ""
+                // }
+                src={profile?.profilePictureUrl || ""}
                 sx={{
                   width: {
                     xs: 140,

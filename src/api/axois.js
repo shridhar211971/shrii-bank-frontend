@@ -2,7 +2,8 @@ import axios from "axios";
 import { getToken } from "../utils/token";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/api",
+  // baseURL: "http://localhost:8080/api",
+  baseURL: "http://18.224.180.211:8080/api",
   headers: {
     "Content-Type": "application/json",
   },
