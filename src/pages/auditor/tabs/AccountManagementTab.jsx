@@ -17,7 +17,7 @@ import {
   forgotPassword,
   resetPassword,
 } from "../../../features/auth/authSlice";
-import { transferMoney } from "../../../features/transaction/transactionSlice";
+import { depositMoney } from "../../../features/transaction/transactionSlice";
 import { ROLES } from "../../../constants/roles";
 import toast from "react-hot-toast";
 // import Register from "../../auth/Register";
@@ -113,13 +113,13 @@ const AccountManagementTab = () => {
       return;
     }
     if (Number(depositData.amount) <= 0) {
-  toast.error("Amount must be greater than 0");
-  return;
-}
+      toast.error("Amount must be greater than 0");
+      return;
+    }
     if (registerData.phoneNumber.length !== 10) {
-  toast.error("Phone number must be 10 digits");
-  return;
-}
+      toast.error("Phone number must be 10 digits");
+      return;
+    }
     setLoading(true);
     try {
       const result = await dispatch(registerUser(registerData)).unwrap();
@@ -151,11 +151,13 @@ const AccountManagementTab = () => {
     try {
       // Deposit is a transfer with type DEPOSIT
       const result = await dispatch(
-        transferMoney({
-          ...depositData,
-          destinationAccountNumber: depositData.accountNumber,
-          type: "DEPOSIT",
-        })
+        depositMoney({
+          accountNumber: depositData.accountNumber,
+
+          amount: depositData.amount,
+
+          description: depositData.description,
+        }),
       ).unwrap();
 
       toast.success(result?.message || "Deposit processed successfully!");
@@ -202,7 +204,10 @@ const AccountManagementTab = () => {
     setLoading(true);
     try {
       const result = await dispatch(
-        resetPassword({ code: resetData.code, newPassword: resetData.newPassword })
+        resetPassword({
+          code: resetData.code,
+          newPassword: resetData.newPassword,
+        }),
       ).unwrap();
       toast.success(result?.message || "Password reset successfully");
       setResetMode("request");
@@ -230,52 +235,52 @@ const AccountManagementTab = () => {
           mb: 4,
         }}
       > */}
-           <Box mb={5}>
-                        <Typography
-                          variant="h5"
-                          sx={{
-                            color: "var(--body-text)",
-                            fontWeight: 900,
-                            mb: 1,
-                          }}
-                        >
-                          Account Management
-                        </Typography>
-                
-                        <Typography
-                          sx={{
-                            color: "var(--muted)",
-                            fontSize: "16px",
-                            mb:1,
-                          }}
-                        >
-                          Manage your bank accounts and transactions
-                        </Typography>
-                      </Box>
-        <Tabs
-          value={activeTab}
-          onChange={(e, newValue) => setActiveTab(newValue)}
+      <Box mb={5}>
+        <Typography
+          variant="h5"
           sx={{
-            mb: 2,
-            "& .MuiTab-root": {
-              color: "var(--body-text)",
-              textTransform: "none",
-              fontSize: "16px",
-              fontWeight: 600,
-              "&.Mui-selected": {
-                color: "var(--accent)",
-              },
-            },
-            "& .MuiTabs-indicator": {
-              background: "var(--accent)",
-              height: 3,
-            },
+            color: "var(--body-text)",
+            fontWeight: 900,
+            mb: 1,
           }}
         >
-          <Tab label="Register User" />
-          <Tab label="Reset Password" />
-          <Tab label="Deposit Money" />
-        </Tabs>
+          Account Management
+        </Typography>
+
+        <Typography
+          sx={{
+            color: "var(--muted)",
+            fontSize: "16px",
+            mb: 1,
+          }}
+        >
+          Manage your bank accounts and transactions
+        </Typography>
+      </Box>
+      <Tabs
+        value={activeTab}
+        onChange={(e, newValue) => setActiveTab(newValue)}
+        sx={{
+          mb: 2,
+          "& .MuiTab-root": {
+            color: "var(--body-text)",
+            textTransform: "none",
+            fontSize: "16px",
+            fontWeight: 600,
+            "&.Mui-selected": {
+              color: "var(--accent)",
+            },
+          },
+          "& .MuiTabs-indicator": {
+            background: "var(--accent)",
+            height: 3,
+          },
+        }}
+      >
+        <Tab label="Register User" />
+        <Tab label="Reset Password" />
+        <Tab label="Deposit Money" />
+      </Tabs>
       {/* </Paper> */}
 
       {/* TAB CONTENT */}
@@ -307,7 +312,13 @@ const AccountManagementTab = () => {
                 <Stack spacing={3}>
                   <Grid container spacing={3}>
                     <Grid item xs={12} md={6}>
-                      <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                      <Typography
+                        sx={{
+                          color: "var(--body-text)",
+                          mb: 1,
+                          fontWeight: 500,
+                        }}
+                      >
                         First Name
                       </Typography>
                       <TextField
@@ -320,7 +331,13 @@ const AccountManagementTab = () => {
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                      <Typography
+                        sx={{
+                          color: "var(--body-text)",
+                          mb: 1,
+                          fontWeight: 500,
+                        }}
+                      >
                         Last Name
                       </Typography>
                       <TextField
@@ -335,7 +352,9 @@ const AccountManagementTab = () => {
                   </Grid>
 
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       Email Address
                     </Typography>
                     <TextField
@@ -350,7 +369,9 @@ const AccountManagementTab = () => {
                   </Box>
 
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       Phone Number
                     </Typography>
                     <TextField
@@ -358,27 +379,29 @@ const AccountManagementTab = () => {
                       name="phoneNumber"
                       placeholder="+91 XXXXXXXXXX"
                       value={registerData.phoneNumber}
-                    //   onChange={handleRegisterChange}
-                    //   sx={textFieldSx}
-                     onChange={(e) => {
-    const value = e.target.value.replace(/\D/g, "");
+                      //   onChange={handleRegisterChange}
+                      //   sx={textFieldSx}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
 
-    if (value.length <= 10) {
-      setRegisterData((prev) => ({
-        ...prev,
-        phoneNumber: value,
-      }));
-    }
-  }}
-  sx={textFieldSx}
-  inputProps={{
-    maxLength: 10,
-  }}
+                        if (value.length <= 10) {
+                          setRegisterData((prev) => ({
+                            ...prev,
+                            phoneNumber: value,
+                          }));
+                        }
+                      }}
+                      sx={textFieldSx}
+                      inputProps={{
+                        maxLength: 10,
+                      }}
                     />
                   </Box>
 
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       Password
                     </Typography>
                     <TextField
@@ -393,7 +416,9 @@ const AccountManagementTab = () => {
                   </Box>
 
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       Role
                     </Typography>
                     <TextField
@@ -429,14 +454,17 @@ const AccountManagementTab = () => {
                       fontSize: "16px",
                     }}
                   >
-                    {loading ? <CircularProgress size={24} color="inherit" /> : "Register User"}
+                    {loading ? (
+                      <CircularProgress size={24} color="inherit" />
+                    ) : (
+                      "Register User"
+                    )}
                   </Button>
                 </Stack>
               </form>
             </Paper>
           </Grid>
-        // <Register isAuditor={true} />
-        
+          // <Register isAuditor={true} />
         )}
 
         {/* RESET PASSWORD TAB */}
@@ -462,10 +490,18 @@ const AccountManagementTab = () => {
                 Reset User Password
               </Typography>
 
-              <form onSubmit={resetMode === "confirm" ? handleResetSubmit : handleForgotSubmit}>
+              <form
+                onSubmit={
+                  resetMode === "confirm"
+                    ? handleResetSubmit
+                    : handleForgotSubmit
+                }
+              >
                 <Stack spacing={3}>
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       User Email
                     </Typography>
                     <TextField
@@ -483,7 +519,13 @@ const AccountManagementTab = () => {
                   {resetMode === "confirm" && (
                     <>
                       <Box>
-                        <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                        <Typography
+                          sx={{
+                            color: "var(--body-text)",
+                            mb: 1,
+                            fontWeight: 500,
+                          }}
+                        >
                           Reset Code
                         </Typography>
                         <TextField
@@ -497,7 +539,13 @@ const AccountManagementTab = () => {
                       </Box>
 
                       <Box>
-                        <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                        <Typography
+                          sx={{
+                            color: "var(--body-text)",
+                            mb: 1,
+                            fontWeight: 500,
+                          }}
+                        >
                           New Password
                         </Typography>
                         <TextField
@@ -589,7 +637,9 @@ const AccountManagementTab = () => {
               <form onSubmit={handleDepositSubmit}>
                 <Stack spacing={3}>
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       Account Number
                     </Typography>
                     <TextField
@@ -600,16 +650,18 @@ const AccountManagementTab = () => {
                       onChange={handleDepositChange}
                       sx={textFieldSx}
                       type="number"
-                  onKeyDown={(e) => {
-                    if (["e", "E", "+", "-"].includes(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
+                      onKeyDown={(e) => {
+                        if (["e", "E", "+", "-"].includes(e.key)) {
+                          e.preventDefault();
+                        }
+                      }}
                     />
                   </Box>
 
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       Amount (₹)
                     </Typography>
                     <TextField
@@ -620,16 +672,18 @@ const AccountManagementTab = () => {
                       onChange={handleDepositChange}
                       sx={textFieldSx}
                       type="number"
-                  onKeyDown={(e) => {
-                    if (["e", "E", "+", "-"].includes(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
+                      onKeyDown={(e) => {
+                        if (["e", "E", "+", "-"].includes(e.key)) {
+                          e.preventDefault();
+                        }
+                      }}
                     />
                   </Box>
 
                   <Box>
-                    <Typography sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ color: "var(--body-text)", mb: 1, fontWeight: 500 }}
+                    >
                       Description
                     </Typography>
                     <TextField
@@ -665,7 +719,11 @@ const AccountManagementTab = () => {
                       fontSize: "16px",
                     }}
                   >
-                    {loading ? <CircularProgress size={24} color="inherit" /> : "Process Deposit"}
+                    {loading ? (
+                      <CircularProgress size={24} color="inherit" />
+                    ) : (
+                      "Process Deposit"
+                    )}
                   </Button>
                 </Stack>
               </form>
